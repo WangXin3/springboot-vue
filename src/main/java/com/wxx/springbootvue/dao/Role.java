@@ -1,6 +1,7 @@
 package com.wxx.springbootvue.dao;
 
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author 她爱微笑
@@ -17,6 +18,8 @@ public class Role {
 	private Date createTime;
 
 	private Date updateTime;
+
+	private List<Permission> permissions;
 
 	public Long getId() {
 		return id;
@@ -56,5 +59,13 @@ public class Role {
 
 	public void setUpdateTime(Date updateTime) {
 		this.updateTime = updateTime;
+	}
+
+	public List<Permission> getPermissions() {
+		return permissions;
+	}
+
+	public void setPermissions(List<Permission> permissions) {
+		this.permissions = permissions;
 	}
 }
