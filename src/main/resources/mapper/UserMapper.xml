@@ -16,4 +16,36 @@
         WHERE ur.role_id = r.id
         AND ur.user_id = #{id};
     </select>
+
+    <sql id="userInfo">
+        tu.id, tu.avatar, tu.username, tu.email, tu.nickname, tu.gender, tu.create_time, tu.update_time,
+         tu.last_login_time, tu.`status`
+    </sql>
+
+    <select id="getUserList" resultType="com.wxx.springbootvue.dao.User">
+        SELECT <include refid="userInfo"></include>
+        FROM tb_user tu;
+    </select>
+
+    <resultMap id="userMap" type="com.wxx.springbootvue.dao.User">
+        <id property="id" column="id"/>
+
+        <collection property="roles" column="id" javaType="ArrayList" ofType="com.wxx.springbootvue.dao.Role"
+                    select="selectRoleById"/>
+    </resultMap>
+
+    <select id="selectRoleById" resultType="com.wxx.springbootvue.dao.Role">
+        SELECT tr.*
+        FROM tb_user_role tur
+        LEFT JOIN tb_role tr ON tur.role_id = tr.id
+        WHERE tur.user_id = #{id};
+    </select>
+
+    <select id="getUserById" resultMap="userMap">
+        SELECT <include refid="userInfo"></include>
+        FROM tb_user tu
+        WHERE tu.id = #{uid};
+    </select>
+
+
 </mapper>

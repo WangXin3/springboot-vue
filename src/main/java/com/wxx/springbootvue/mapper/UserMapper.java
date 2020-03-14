@@ -24,4 +24,17 @@ public interface UserMapper {
 	 * @return
 	 */
 	List<Role> getUserRoleByUid(Long id);
+
+	/**
+	 * 获取用户列表
+	 * @return
+	 */
+	List<User> getUserList();
+
+	/**
+	 * 根据用户id查询用户
+	 * @param uid
+	 * @return
+	 */
+	User getUserById(Long uid);
 }

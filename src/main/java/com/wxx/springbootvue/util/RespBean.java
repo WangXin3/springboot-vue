@@ -20,6 +20,10 @@ public class RespBean {
 		return new RespBean(200, msg, data);
 	}
 
+	public static RespBean success(Object data) {
+		return new RespBean(200, null, data);
+	}
+
 	public static RespBean error(String msg) {
 		return new RespBean(500, msg, null);
 	}
