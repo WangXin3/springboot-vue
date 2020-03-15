@@ -53,7 +53,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.addFilterBefore(new JwtLoginFilter("/login", authenticationManager(), jwtUtils),
 						UsernamePasswordAuthenticationFilter.class)
 				.addFilterBefore(new JwtAuthenticationTokenFilter(jwtUtils, userService), UsernamePasswordAuthenticationFilter.class)
-				.csrf().disable();
+				.csrf().disable().cors();
 	}
 
 }

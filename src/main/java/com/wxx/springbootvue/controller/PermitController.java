@@ -23,6 +23,6 @@ public class PermitController {
 			id = 0L;
 		}
 
-		return RespBean.success(permitService.getPermitListById(id));
+		return RespBean.successData(permitService.getPermitListById(id));
 	}
 }

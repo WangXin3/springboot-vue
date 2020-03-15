@@ -21,6 +21,6 @@ public class RoleController {
 
 	@GetMapping
 	public RespBean roleList() {
-		return RespBean.success(roleService.getRoleList());
+		return RespBean.successData(roleService.getRoleList());
 	}
 }

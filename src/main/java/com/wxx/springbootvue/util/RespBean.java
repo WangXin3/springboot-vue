@@ -4,7 +4,7 @@ package com.wxx.springbootvue.util;
  * @author Wang
  */
 public class RespBean {
-	private Integer status;
+	private Integer code;
 	private String msg;
 	private Object data;
 
@@ -20,7 +20,7 @@ public class RespBean {
 		return new RespBean(200, msg, data);
 	}
 
-	public static RespBean success(Object data) {
+	public static RespBean successData(Object data) {
 		return new RespBean(200, null, data);
 	}
 
@@ -35,18 +35,18 @@ public class RespBean {
 	private RespBean() {
 	}
 
-	private RespBean(Integer status, String msg, Object data) {
-		this.status = status;
+	private RespBean(Integer code, String msg, Object data) {
+		this.code = code;
 		this.msg = msg;
 		this.data = data;
 	}
 
-	public Integer getStatus() {
-		return status;
+	public Integer getCode() {
+		return code;
 	}
 
-	public RespBean setStatus(Integer status) {
-		this.status = status;
+	public RespBean setCode(Integer code) {
+		this.code = code;
 		return this;
 	}
 
