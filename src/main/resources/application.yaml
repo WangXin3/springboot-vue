@@ -18,6 +18,6 @@ jwt:
 
 # mybatis
 mybatis:
-  mapper-locations: classpath:mapper/*.xml #映射文件配置
+  mapper-locations: classpath:mapper/**/*.xml #映射文件配置
   configuration:
     map-underscore-to-camel-case: true #开启驼峰命名
