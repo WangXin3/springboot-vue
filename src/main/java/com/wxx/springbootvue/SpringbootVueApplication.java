@@ -7,7 +7,7 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 /**
  * @author Wang
  */
-@MapperScan(basePackages = "com.wxx.springbootvue.mapper")
+@MapperScan(basePackages = "com.wxx.springbootvue.system.mapper")
 @SpringBootApplication
 public class SpringbootVueApplication {
 

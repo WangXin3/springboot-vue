@@ -1,24 +1,17 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.wxx.springbootvue.mapper.RoleMapper">
+<mapper namespace="com.wxx.springbootvue.system.mapper.RoleMapper">
     
-    <resultMap id="roleMap" type="com.wxx.springbootvue.dao.Role">
+    <resultMap id="roleMap" type="com.wxx.springbootvue.system.po.Role">
         <id property="id" column="id" />
         <result property="roleName" column="role_name" />
         <result property="createTime" column="create_time" />
         <result property="updateTime" column="update_time" />
         <result property="description" column="description" />
-        <collection property="permissions"  column="id" javaType="ArrayList" ofType="com.wxx.springbootvue.dao.Permission"
-                     select="selectPermitById"/>
     </resultMap>
 
-    <select id="selectPermitById" resultType="com.wxx.springbootvue.dao.Permission">
-        SELECT tp.*
-        FROM tb_role_permission trp
-        LEFT JOIN tb_permission tp ON trp.permission_id = tp.id
-        WHERE trp.role_id = #{id};
-    </select>
+
 
     <select id="getRoleList" resultMap="roleMap">
         SELECT * FROM tb_role;

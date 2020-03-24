@@ -1,16 +1,16 @@
 <?xml version="1.0" encoding="utf-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.wxx.springbootvue.mapper.UserMapper">
+<mapper namespace="com.wxx.springbootvue.system.mapper.UserMapper">
 
 
-    <select id="loadUserByUsername" resultType="com.wxx.springbootvue.dao.User">
+    <select id="loadJwtUserByUsername" resultType="com.wxx.springbootvue.system.util.JwtUser">
         SELECT *
         FROM tb_user u
         WHERE u.username = #{username}
     </select>
 
-    <select id="getUserRoleByUid" resultType="com.wxx.springbootvue.dao.Role">
+    <select id="getUserRoleByUid" resultType="com.wxx.springbootvue.system.po.Role">
         SELECT r.*
         FROM tb_user_role ur, tb_role r
         WHERE ur.role_id = r.id
@@ -19,22 +19,22 @@
 
     <sql id="userInfo">
         tu.id, tu.avatar, tu.username, tu.email, tu.nickname, tu.gender, tu.create_time, tu.update_time,
-         tu.last_login_time, tu.`status`
+         tu.last_login_time, tu.enabled
     </sql>
 
-    <select id="getUserList" resultType="com.wxx.springbootvue.dao.User">
+    <select id="getUserList" resultType="com.wxx.springbootvue.system.po.User">
         SELECT <include refid="userInfo"></include>
         FROM tb_user tu;
     </select>
 
-    <resultMap id="userMap" type="com.wxx.springbootvue.dao.User">
+    <resultMap id="userMap" type="com.wxx.springbootvue.system.po.User">
         <id property="id" column="id"/>
 
-        <collection property="roles" column="id" javaType="ArrayList" ofType="com.wxx.springbootvue.dao.Role"
+        <collection property="roles" column="id" javaType="ArrayList" ofType="com.wxx.springbootvue.system.po.Role"
                     select="selectRoleById"/>
     </resultMap>
 
-    <select id="selectRoleById" resultType="com.wxx.springbootvue.dao.Role">
+    <select id="selectRoleById" resultType="com.wxx.springbootvue.system.po.Role">
         SELECT tr.*
         FROM tb_user_role tur
         LEFT JOIN tb_role tr ON tur.role_id = tr.id
@@ -46,6 +46,4 @@
         FROM tb_user tu
         WHERE tu.id = #{uid};
     </select>
-
-
 </mapper>
