@@ -6,10 +6,8 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
-import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Date;
-import java.util.List;
+import java.util.*;
+import java.util.stream.Collectors;
 
 /**
  * @author 她爱微笑
@@ -42,7 +40,7 @@ public class JwtUser implements UserDetails {
 	private Date lastLoginTime;
 
 	@JsonIgnore
-	private List<Role> roles;
+	private Collection<GrantedAuthority> authorities;
 
 	/**
 	 * 用户状态 0=禁用，1=正常
@@ -52,6 +50,22 @@ public class JwtUser implements UserDetails {
 	public JwtUser(Long id, String username) {
 		this.id = id;
 		this.username = username;
+	}
+
+	public JwtUser(Long id, String avatar, String username, String password, String email, String nickname, Integer gender,
+				   Date createTime, Date updateTime, Date lastLoginTime, Collection<GrantedAuthority> authorities, Boolean enabled) {
+		this.id = id;
+		this.avatar = avatar;
+		this.username = username;
+		this.password = password;
+		this.email = email;
+		this.nickname = nickname;
+		this.gender = gender;
+		this.createTime = createTime;
+		this.updateTime = updateTime;
+		this.lastLoginTime = lastLoginTime;
+		this.authorities = authorities;
+		this.enabled = enabled;
 	}
 
 	public Long getId() {
@@ -126,14 +140,6 @@ public class JwtUser implements UserDetails {
 		this.lastLoginTime = lastLoginTime;
 	}
 
-	public List<Role> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
-	}
-
 	public Boolean getEnabled() {
 		return enabled;
 	}
@@ -142,13 +148,12 @@ public class JwtUser implements UserDetails {
 		this.enabled = enabled;
 	}
 
+	public Collection<String> getRoles() {
+		return authorities.stream().map(GrantedAuthority::getAuthority).collect(Collectors.toSet());
+	}
+
 	@Override
 	public Collection<? extends GrantedAuthority> getAuthorities() {
-		List<SimpleGrantedAuthority> authorities = new ArrayList<>();
-		for (Role role : roles) {
-			authorities.add(new SimpleGrantedAuthority(role.getRoleName()));
-		}
-
 		return authorities;
 	}
 

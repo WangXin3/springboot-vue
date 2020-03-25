@@ -2,7 +2,6 @@ package com.wxx.springbootvue.system.mapper;
 
 import com.wxx.springbootvue.system.po.Role;
 import com.wxx.springbootvue.system.po.User;
-import com.wxx.springbootvue.system.util.JwtUser;
 
 import java.util.List;
 
@@ -17,7 +16,7 @@ public interface UserMapper {
 	 * @param username
 	 * @return
 	 */
-	JwtUser loadJwtUserByUsername(String username);
+	User loadUserByUsername(String username);
 
 	/**
 	 * 根据用户id查询用户所具有的权限

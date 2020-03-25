@@ -1,8 +1,9 @@
 package com.wxx.springbootvue.system.controller;
 
 import com.wxx.springbootvue.system.service.RoleService;
-import com.wxx.springbootvue.system.util.RespBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
@@ -20,7 +21,8 @@ public class RoleController {
 	private RoleService roleService;
 
 	@GetMapping
-	public RespBean roleList() {
-		return RespBean.successData(roleService.getRoleList());
+	@PreAuthorize("@wx.check('role:list')")
+	public ResponseEntity roleList() {
+		return ResponseEntity.ok(roleService.getRoleList());
 	}
 }

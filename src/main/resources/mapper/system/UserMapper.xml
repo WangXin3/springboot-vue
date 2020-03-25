@@ -4,7 +4,7 @@
 <mapper namespace="com.wxx.springbootvue.system.mapper.UserMapper">
 
 
-    <select id="loadJwtUserByUsername" resultType="com.wxx.springbootvue.system.util.JwtUser">
+    <select id="loadUserByUsername" resultType="com.wxx.springbootvue.system.po.User">
         SELECT *
         FROM tb_user u
         WHERE u.username = #{username}

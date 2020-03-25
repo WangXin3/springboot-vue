@@ -1,7 +1,10 @@
 package com.wxx.springbootvue.system.service;
 
 import com.wxx.springbootvue.system.po.Role;
+import com.wxx.springbootvue.system.po.User;
+import org.springframework.security.core.GrantedAuthority;
 
+import java.util.Collection;
 import java.util.List;
 
 /**
@@ -15,4 +18,11 @@ public interface RoleService {
 	 * @return
 	 */
 	List<Role> getRoleList();
+
+	/**
+	 * 获取当前用户被授予的权限
+	 * @param user
+	 * @return
+	 */
+	Collection<GrantedAuthority> getGrantedAuthorities(User user);
 }

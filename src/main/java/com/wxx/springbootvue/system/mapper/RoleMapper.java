@@ -16,4 +16,10 @@ public interface RoleMapper {
 	 */
 	List<Role> getRoleList();
 
+	/**
+	 * 根据用户的id查询用户角色
+	 * @param id
+	 * @return
+	 */
+	List<Role> getRoleByUserId(Long id);
 }

@@ -5,10 +5,16 @@ import com.wxx.springbootvue.system.service.UserService;
 import com.wxx.springbootvue.system.util.JwtUser;
 import com.wxx.springbootvue.system.util.JwtUtils;
 import com.wxx.springbootvue.system.util.RespBean;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.http.HttpStatus;
+import org.springframework.security.access.AccessDeniedException;
+import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.core.AuthenticationException;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.web.filter.GenericFilterBean;
 
 import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
@@ -19,7 +25,7 @@ import java.io.PrintWriter;
  * @author 她爱微笑
  * @date 2020/3/8
  */
-public class JwtAuthenticationTokenFilter extends GenericFilter {
+public class JwtAuthenticationTokenFilter extends GenericFilterBean {
 
 
 	private JwtUtils jwtUtils;
@@ -41,7 +47,7 @@ public class JwtAuthenticationTokenFilter extends GenericFilter {
 		// 获取 Request 中的请求头为 Authorization 的 token 值
 		String completeToken = request.getHeader(jwtUtils.getTokenHeader());
 		// 验证 值是否以"Wangxin3"开头
-		if (completeToken != null && completeToken.startsWith(jwtUtils.getTokenHead())) {
+		if (StringUtils.isNotBlank(completeToken) && completeToken.startsWith(jwtUtils.getTokenHead())) {
 			// 截取token中"Wangxin3"后面的值，
 			final String tokenValue = jwtUtils.getCompleteToken(completeToken);
 
@@ -51,7 +57,7 @@ public class JwtAuthenticationTokenFilter extends GenericFilter {
 			} catch (Exception e) {
 				// 解析token出错， token被改
 				PrintWriter out = response.getWriter();
-				out.write(JSONObject.toJSONString(RespBean.error("请重新登录!")));
+				out.write(JSONObject.toJSONString(RespBean.error("请先登录!", HttpStatus.UNAUTHORIZED)));
 				out.flush();
 				out.close();
 				return;

@@ -1,5 +1,7 @@
 package com.wxx.springbootvue.system.util;
 
+import org.springframework.http.HttpStatus;
+
 /**
  * @author Wang
  */
@@ -28,9 +30,10 @@ public class RespBean {
 		return new RespBean(500, msg, null);
 	}
 
-	public static RespBean error(String msg, Object data) {
-		return new RespBean(500, msg, data);
+	public static RespBean error(String msg, HttpStatus code) {
+		return new RespBean(code.value(), msg, null);
 	}
+
 
 	private RespBean() {
 	}

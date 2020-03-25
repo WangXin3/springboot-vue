@@ -9,11 +9,27 @@
         <result property="createTime" column="create_time" />
         <result property="updateTime" column="update_time" />
         <result property="description" column="description" />
+
+        <collection property="menus" column="id" select="selectMenuByRoleId"/>
     </resultMap>
+
+    <select id="selectMenuByRoleId" resultType="com.wxx.springbootvue.system.po.Menu">
+        SELECT *
+        FROM tb_menu tm
+        LEFT JOIN tb_role_menu trm ON tm.id = trm.menu_id
+        WHERE trm.role_id = #{id}
+    </select>
 
 
 
     <select id="getRoleList" resultMap="roleMap">
         SELECT * FROM tb_role;
+    </select>
+
+	<select id="getRoleByUserId" resultMap="roleMap">
+        SELECT *
+        FROM tb_role tr
+        LEFT JOIN tb_user_role tur ON tr.id = tur.role_id
+        WHERE tur.user_id = #{id};
     </select>
 </mapper>

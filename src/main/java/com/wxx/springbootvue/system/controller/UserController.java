@@ -2,8 +2,8 @@ package com.wxx.springbootvue.system.controller;
 
 import com.wxx.springbootvue.system.service.UserService;
 import com.wxx.springbootvue.system.util.JwtUser;
-import com.wxx.springbootvue.system.util.RespBean;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -22,18 +22,18 @@ public class UserController {
 	private UserService userService;
 
 	@GetMapping
-	public RespBean getUserList() {
-		return RespBean.successData(userService.getUserList());
+	public ResponseEntity getUserList() {
+		return ResponseEntity.ok(userService.getUserList());
 	}
 
 	@GetMapping("/{uid}")
-	public RespBean getUserById(@PathVariable Long uid) {
-		return RespBean.successData(userService.getUserById(uid));
+	public ResponseEntity getUserById(@PathVariable Long uid) {
+		return ResponseEntity.ok(userService.getUserById(uid));
 	}
 
 	@GetMapping("/info")
-	public RespBean getCurrentUser() {
+	public ResponseEntity getCurrentUser() {
 		JwtUser user = (JwtUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		return RespBean.successData(user);
+		return ResponseEntity.ok(user);
 	}
 }
