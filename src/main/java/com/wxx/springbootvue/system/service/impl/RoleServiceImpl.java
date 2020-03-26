@@ -1,9 +1,9 @@
 package com.wxx.springbootvue.system.service.impl;
 
-import com.wxx.springbootvue.system.po.Menu;
-import com.wxx.springbootvue.system.po.Role;
+import com.wxx.springbootvue.system.domain.po.Menu;
+import com.wxx.springbootvue.system.domain.po.Role;
 import com.wxx.springbootvue.system.mapper.RoleMapper;
-import com.wxx.springbootvue.system.po.User;
+import com.wxx.springbootvue.system.domain.po.User;
 import com.wxx.springbootvue.system.service.RoleService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;

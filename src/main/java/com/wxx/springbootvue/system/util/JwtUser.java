@@ -1,9 +1,7 @@
 package com.wxx.springbootvue.system.util;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.wxx.springbootvue.system.po.Role;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.*;

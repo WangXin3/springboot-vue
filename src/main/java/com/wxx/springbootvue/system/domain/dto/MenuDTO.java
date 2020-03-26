@@ -1,31 +1,20 @@
-package com.wxx.springbootvue.system.po;
+package com.wxx.springbootvue.system.domain.dto;
 
+import java.io.Serializable;
 import java.util.Date;
+import java.util.List;
 
 /**
  * @author 她爱微笑
- * @date 2020/3/24
+ * @date 2020/3/26
  */
-public class Menu {
+public class MenuDTO implements Serializable {
 
-	/**
-	 * `id` int(11) NOT NULL AUTO_INCREMENT COMMENT '权限ID',
-	 * `parent_id` int(11) NOT NULL COMMENT '上级菜单id',
-	 * `title` varchar(100) DEFAULT NULL COMMENT '菜单名称',
-	 * `component` varchar(255) DEFAULT NULL COMMENT '组件',
-	 * `icon` varchar(100) DEFAULT NULL COMMENT '资源图标',
-	 * `path` varchar(255) DEFAULT NULL COMMENT '操作/访问资源的接口地址',
-	 * `component_name` varchar(255) DEFAULT NULL COMMENT '组件名称',
-	 * `type` int(11) NOT NULL COMMENT '资源类型1=顶级菜单, 2=二级菜单，3=按钮',
-	 * `permission` varchar(255) DEFAULT NULL COMMENT '权限',
-	 * `create_time` datetime NOT NULL COMMENT '创建时间',
-	 */
+	private Long id;
 
-	private Integer id;
+	private Long parentId;
 
-	private Integer parentId;
-
-	private String title;
+	private String name;
 
 	private String component;
 
@@ -41,12 +30,14 @@ public class Menu {
 
 	private Date createTime;
 
+	private List<MenuDTO> children;
+
 	@Override
 	public String toString() {
-		return "Menu{" +
+		return "MenuDTO{" +
 				"id=" + id +
 				", parentId=" + parentId +
-				", title='" + title + '\'' +
+				", name='" + name + '\'' +
 				", component='" + component + '\'' +
 				", icon='" + icon + '\'' +
 				", path='" + path + '\'' +
@@ -54,31 +45,32 @@ public class Menu {
 				", type=" + type +
 				", permission='" + permission + '\'' +
 				", createTime=" + createTime +
+				", children=" + children +
 				'}';
 	}
 
-	public Integer getId() {
+	public Long getId() {
 		return id;
 	}
 
-	public void setId(Integer id) {
+	public void setId(Long id) {
 		this.id = id;
 	}
 
-	public Integer getParentId() {
+	public Long getParentId() {
 		return parentId;
 	}
 
-	public void setParentId(Integer parentId) {
+	public void setParentId(Long parentId) {
 		this.parentId = parentId;
 	}
 
-	public String getTitle() {
-		return title;
+	public String getName() {
+		return name;
 	}
 
-	public void setTitle(String title) {
-		this.title = title;
+	public void setName(String name) {
+		this.name = name;
 	}
 
 	public String getComponent() {
@@ -135,5 +127,13 @@ public class Menu {
 
 	public void setCreateTime(Date createTime) {
 		this.createTime = createTime;
+	}
+
+	public List<MenuDTO> getChildren() {
+		return children;
+	}
+
+	public void setChildren(List<MenuDTO> children) {
+		this.children = children;
 	}
 }

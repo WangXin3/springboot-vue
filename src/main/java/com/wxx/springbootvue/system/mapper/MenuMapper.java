@@ -1,6 +1,6 @@
 package com.wxx.springbootvue.system.mapper;
 
-import com.wxx.springbootvue.system.po.Menu;
+import com.wxx.springbootvue.system.domain.dto.MenuDTO;
 
 import java.util.List;
 
@@ -16,5 +16,12 @@ public interface MenuMapper {
 	 * @param id
 	 * @return
 	 */
-	List<Menu> menuByUserId(Long id);
+	List<MenuDTO> menuByUserId(Long id);
+
+	/**
+	 * 根据父菜单id查询子菜单
+	 * @param pid
+	 * @return
+	 */
+	List<MenuDTO> findByPid(Long pid);
 }

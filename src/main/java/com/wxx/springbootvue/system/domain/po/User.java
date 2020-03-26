@@ -1,4 +1,4 @@
-package com.wxx.springbootvue.system.po;
+package com.wxx.springbootvue.system.domain.po;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 

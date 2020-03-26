@@ -1,17 +1,15 @@
 package com.wxx.springbootvue.system.service.impl;
 
-import com.wxx.springbootvue.system.po.User;
+import com.wxx.springbootvue.system.domain.po.User;
 import com.wxx.springbootvue.system.mapper.UserMapper;
 import com.wxx.springbootvue.system.service.RoleService;
 import com.wxx.springbootvue.system.service.UserService;
 import com.wxx.springbootvue.system.util.JwtUser;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.Date;
 import java.util.List;
 
 /**

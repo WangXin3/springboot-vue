@@ -1,6 +1,6 @@
 package com.wxx.springbootvue.system.mapper;
 
-import com.wxx.springbootvue.system.po.Role;
+import com.wxx.springbootvue.system.domain.po.Role;
 
 import java.util.List;
 

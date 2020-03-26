@@ -1,6 +1,6 @@
 package com.wxx.springbootvue.system.service;
 
-import com.wxx.springbootvue.system.po.User;
+import com.wxx.springbootvue.system.domain.po.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 import java.util.List;

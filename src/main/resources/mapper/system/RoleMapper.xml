@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wxx.springbootvue.system.mapper.RoleMapper">
     
-    <resultMap id="roleMap" type="com.wxx.springbootvue.system.po.Role">
+    <resultMap id="roleMap" type="com.wxx.springbootvue.system.domain.po.Role">
         <id property="id" column="id" />
         <result property="roleName" column="role_name" />
         <result property="createTime" column="create_time" />
@@ -13,7 +13,7 @@
         <collection property="menus" column="id" select="selectMenuByRoleId"/>
     </resultMap>
 
-    <select id="selectMenuByRoleId" resultType="com.wxx.springbootvue.system.po.Menu">
+    <select id="selectMenuByRoleId" resultType="com.wxx.springbootvue.system.domain.po.Menu">
         SELECT *
         FROM tb_menu tm
         LEFT JOIN tb_role_menu trm ON tm.id = trm.menu_id

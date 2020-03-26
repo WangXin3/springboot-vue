@@ -4,13 +4,13 @@
 <mapper namespace="com.wxx.springbootvue.system.mapper.UserMapper">
 
 
-    <select id="loadUserByUsername" resultType="com.wxx.springbootvue.system.po.User">
+    <select id="loadUserByUsername" resultType="com.wxx.springbootvue.system.domain.po.User">
         SELECT *
         FROM tb_user u
         WHERE u.username = #{username}
     </select>
 
-    <select id="getUserRoleByUid" resultType="com.wxx.springbootvue.system.po.Role">
+    <select id="getUserRoleByUid" resultType="com.wxx.springbootvue.system.domain.po.Role">
         SELECT r.*
         FROM tb_user_role ur, tb_role r
         WHERE ur.role_id = r.id
@@ -22,19 +22,19 @@
          tu.last_login_time, tu.enabled
     </sql>
 
-    <select id="getUserList" resultType="com.wxx.springbootvue.system.po.User">
+    <select id="getUserList" resultType="com.wxx.springbootvue.system.domain.po.User">
         SELECT <include refid="userInfo"></include>
         FROM tb_user tu;
     </select>
 
-    <resultMap id="userMap" type="com.wxx.springbootvue.system.po.User">
+    <resultMap id="userMap" type="com.wxx.springbootvue.system.domain.po.User">
         <id property="id" column="id"/>
 
-        <collection property="roles" column="id" javaType="ArrayList" ofType="com.wxx.springbootvue.system.po.Role"
+        <collection property="roles" column="id" javaType="ArrayList" ofType="com.wxx.springbootvue.system.domain.po.Role"
                     select="selectRoleById"/>
     </resultMap>
 
-    <select id="selectRoleById" resultType="com.wxx.springbootvue.system.po.Role">
+    <select id="selectRoleById" resultType="com.wxx.springbootvue.system.domain.po.Role">
         SELECT tr.*
         FROM tb_user_role tur
         LEFT JOIN tb_role tr ON tur.role_id = tr.id
