@@ -2,6 +2,7 @@ package com.wxx.springbootvue.system.domain.po;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
@@ -9,7 +10,7 @@ import java.util.List;
  * @author 她爱微笑
  * @date 2020/3/8
  */
-public class User {
+public class User implements Serializable {
 
 	private Long id;
 
