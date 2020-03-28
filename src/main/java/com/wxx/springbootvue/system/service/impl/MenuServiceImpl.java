@@ -7,6 +7,7 @@ import com.wxx.springbootvue.system.domain.vo.MenuVO;
 import com.wxx.springbootvue.system.mapper.MenuMapper;
 import com.wxx.springbootvue.system.service.MenuService;
 import com.wxx.springbootvue.system.util.JwtUser;
+import com.wxx.springbootvue.system.util.ObjectUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -31,9 +32,8 @@ public class MenuServiceImpl implements MenuService {
 		JwtUser user = (JwtUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		List<MenuDTO> menus = menuMapper.menuByUserId(user.getId());
 		Map<String, Object> map = buildTree(menus);
-		List<MenuVO> content = buildMenu((List<MenuDTO>) map.get("content"));
-
-		return content;
+		List<MenuDTO> content = ObjectUtils.castList(map.get("content"), MenuDTO.class);
+		return buildMenu(content);
 	}
 
 	@Override
@@ -64,15 +64,15 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	@Override
-	public Map<String, Object> buildTree(List<MenuDTO> menuDTOS) {
+	public Map<String, Object> buildTree(List<MenuDTO> dtoList) {
 
 		List<MenuDTO> trees = new ArrayList<>();
 		Set<Long> ids = new HashSet<>();
-		for (MenuDTO menuDTO : menuDTOS) {
+		for (MenuDTO menuDTO : dtoList) {
 			if (menuDTO.getParentId() == 0) {
 				trees.add(menuDTO);
 			}
-			for (MenuDTO it : menuDTOS) {
+			for (MenuDTO it : dtoList) {
 				if (it.getParentId().equals(menuDTO.getId())) {
 					if (menuDTO.getChildren() == null) {
 						menuDTO.setChildren(new ArrayList<>());
@@ -84,17 +84,17 @@ public class MenuServiceImpl implements MenuService {
 		}
 		Map<String, Object> map = new HashMap<>(2);
 		if (trees.size() == 0) {
-			trees = menuDTOS.stream().filter(s -> !ids.contains(s.getId())).collect(Collectors.toList());
+			trees = dtoList.stream().filter(s -> !ids.contains(s.getId())).collect(Collectors.toList());
 		}
 		map.put("content", trees);
-		map.put("totalElements", menuDTOS.size());
+		map.put("totalElements", dtoList.size());
 		return map;
 	}
 
 	@Override
-	public List<MenuVO> buildMenu(List<MenuDTO> menuDTOS) {
+	public List<MenuVO> buildMenu(List<MenuDTO> dtoList) {
 		List<MenuVO> list = new LinkedList<>();
-		menuDTOS.forEach(menuDTO -> {
+		dtoList.forEach(menuDTO -> {
 			if (menuDTO != null) {
 				List<MenuDTO> menuDtoList = menuDTO.getChildren();
 				MenuVO menuVo = new MenuVO();
