@@ -22,4 +22,46 @@ public interface RoleMapper {
 	 * @return
 	 */
 	List<Role> getRoleByUserId(Long id);
+
+	/**
+	 * 删除
+	 * @param id /
+	 * @return /
+	 */
+	int deleteByPrimaryKey(Integer id);
+
+	/**
+	 * 新增
+	 * @param record /
+	 * @return /
+	 */
+	int insert(Role record);
+
+	/**
+	 * 新增
+	 * @param record /
+	 * @return /
+	 */
+	int insertSelective(Role record);
+
+	/**
+	 * 查询
+	 * @param id /
+	 * @return /
+	 */
+	Role selectByPrimaryKey(Integer id);
+
+	/**
+	 * 更新
+	 * @param record /
+	 * @return /
+	 */
+	int updateByPrimaryKeySelective(Role record);
+
+	/**
+	 * 更新
+	 * @param record /
+	 * @return /
+	 */
+	int updateByPrimaryKey(Role record);
 }

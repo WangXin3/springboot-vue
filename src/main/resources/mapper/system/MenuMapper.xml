@@ -2,7 +2,6 @@
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wxx.springbootvue.system.mapper.MenuMapper">
-
 	<select id="menuByUserId" resultType="com.wxx.springbootvue.system.domain.dto.MenuDTO">
 		SELECT tm.*
 		FROM tb_menu tm
@@ -18,4 +17,160 @@
 		WHERE tm.parent_id = #{pid}
 		AND tm.type != 3;
 	</select>
+    <select id="findByName" resultType="com.wxx.springbootvue.system.domain.dto.MenuDTO">
+		SELECT *
+		FROM tb_menu t
+		WHERE t.`name` = #{name}
+		OR t.component_name = #{componentName}
+		LIMIT 1;
+	</select>
+
+	<resultMap id="BaseResultMap" type="com.wxx.springbootvue.system.domain.po.Menu">
+		<id column="id" jdbcType="INTEGER" property="id" />
+		<result column="parent_id" jdbcType="INTEGER" property="parentId" />
+		<result column="name" jdbcType="VARCHAR" property="name" />
+		<result column="component" jdbcType="VARCHAR" property="component" />
+		<result column="icon" jdbcType="VARCHAR" property="icon" />
+		<result column="path" jdbcType="VARCHAR" property="path" />
+		<result column="component_name" jdbcType="VARCHAR" property="componentName" />
+		<result column="type" jdbcType="INTEGER" property="type" />
+		<result column="permission" jdbcType="VARCHAR" property="permission" />
+		<result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
+	</resultMap>
+	<sql id="Base_Column_List">
+    id, parent_id, name, component, icon, path, component_name, type, permission, create_time
+  </sql>
+	<select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from tb_menu
+		where id = #{id,jdbcType=INTEGER}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
+    delete from tb_menu
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+	<insert id="insert" parameterType="com.wxx.springbootvue.system.domain.po.Menu">
+    insert into tb_menu (id, parent_id, name,
+      component, icon, path,
+      component_name, type, permission,
+      create_time)
+    values (#{id,jdbcType=INTEGER}, #{parentId,jdbcType=INTEGER}, #{name,jdbcType=VARCHAR},
+      #{component,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{path,jdbcType=VARCHAR},
+      #{componentName,jdbcType=VARCHAR}, #{type,jdbcType=INTEGER}, #{permission,jdbcType=VARCHAR},
+      #{createTime,jdbcType=TIMESTAMP})
+  </insert>
+	<insert id="insertSelective" parameterType="com.wxx.springbootvue.system.domain.po.Menu">
+		insert into tb_menu
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				id,
+			</if>
+			<if test="parentId != null">
+				parent_id,
+			</if>
+			<if test="name != null">
+				name,
+			</if>
+			<if test="component != null">
+				component,
+			</if>
+			<if test="icon != null">
+				icon,
+			</if>
+			<if test="path != null">
+				path,
+			</if>
+			<if test="componentName != null">
+				component_name,
+			</if>
+			<if test="type != null">
+				type,
+			</if>
+			<if test="permission != null">
+				permission,
+			</if>
+			<if test="createTime != null">
+				create_time,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="id != null">
+				#{id,jdbcType=INTEGER},
+			</if>
+			<if test="parentId != null">
+				#{parentId,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				#{name,jdbcType=VARCHAR},
+			</if>
+			<if test="component != null">
+				#{component,jdbcType=VARCHAR},
+			</if>
+			<if test="icon != null">
+				#{icon,jdbcType=VARCHAR},
+			</if>
+			<if test="path != null">
+				#{path,jdbcType=VARCHAR},
+			</if>
+			<if test="componentName != null">
+				#{componentName,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				#{type,jdbcType=INTEGER},
+			</if>
+			<if test="permission != null">
+				#{permission,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				#{createTime,jdbcType=TIMESTAMP},
+			</if>
+		</trim>
+	</insert>
+	<update id="updateByPrimaryKeySelective" parameterType="com.wxx.springbootvue.system.domain.po.Menu">
+		update tb_menu
+		<set>
+			<if test="parentId != null">
+				parent_id = #{parentId,jdbcType=INTEGER},
+			</if>
+			<if test="name != null">
+				name = #{name,jdbcType=VARCHAR},
+			</if>
+			<if test="component != null">
+				component = #{component,jdbcType=VARCHAR},
+			</if>
+			<if test="icon != null">
+				icon = #{icon,jdbcType=VARCHAR},
+			</if>
+			<if test="path != null">
+				path = #{path,jdbcType=VARCHAR},
+			</if>
+			<if test="componentName != null">
+				component_name = #{componentName,jdbcType=VARCHAR},
+			</if>
+			<if test="type != null">
+				type = #{type,jdbcType=INTEGER},
+			</if>
+			<if test="permission != null">
+				permission = #{permission,jdbcType=VARCHAR},
+			</if>
+			<if test="createTime != null">
+				create_time = #{createTime,jdbcType=TIMESTAMP},
+			</if>
+		</set>
+		where id = #{id,jdbcType=INTEGER}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.wxx.springbootvue.system.domain.po.Menu">
+    update tb_menu
+    set parent_id = #{parentId,jdbcType=INTEGER},
+      name = #{name,jdbcType=VARCHAR},
+      component = #{component,jdbcType=VARCHAR},
+      icon = #{icon,jdbcType=VARCHAR},
+      path = #{path,jdbcType=VARCHAR},
+      component_name = #{componentName,jdbcType=VARCHAR},
+      type = #{type,jdbcType=INTEGER},
+      permission = #{permission,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=TIMESTAMP}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
 </mapper>

@@ -1,5 +1,6 @@
 package com.wxx.springbootvue.system.domain.po;
 
+import javax.validation.constraints.NotNull;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -11,6 +12,7 @@ public class Menu implements Serializable {
 
 	private Long id;
 
+	@NotNull(message = "上级菜单id不能为空")
 	private Integer parentId;
 
 	private String name;
@@ -23,12 +25,12 @@ public class Menu implements Serializable {
 
 	private String componentName;
 
+	@NotNull(message = "资源类型不能为空")
 	private Integer type;
 
 	private String permission;
 
 	private Date createTime;
-
 
 	@Override
 	public String toString() {

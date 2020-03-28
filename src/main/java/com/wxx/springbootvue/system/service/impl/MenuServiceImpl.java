@@ -8,6 +8,7 @@ import com.wxx.springbootvue.system.mapper.MenuMapper;
 import com.wxx.springbootvue.system.service.MenuService;
 import com.wxx.springbootvue.system.util.JwtUser;
 import com.wxx.springbootvue.system.util.ObjectUtils;
+import com.wxx.springbootvue.system.util.RespBean;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -64,15 +65,15 @@ public class MenuServiceImpl implements MenuService {
 	}
 
 	@Override
-	public Map<String, Object> buildTree(List<MenuDTO> dtoList) {
+	public Map<String, Object> buildTree(List<MenuDTO> menus) {
 
 		List<MenuDTO> trees = new ArrayList<>();
 		Set<Long> ids = new HashSet<>();
-		for (MenuDTO menuDTO : dtoList) {
+		for (MenuDTO menuDTO : menus) {
 			if (menuDTO.getParentId() == 0) {
 				trees.add(menuDTO);
 			}
-			for (MenuDTO it : dtoList) {
+			for (MenuDTO it : menus) {
 				if (it.getParentId().equals(menuDTO.getId())) {
 					if (menuDTO.getChildren() == null) {
 						menuDTO.setChildren(new ArrayList<>());
@@ -84,17 +85,17 @@ public class MenuServiceImpl implements MenuService {
 		}
 		Map<String, Object> map = new HashMap<>(2);
 		if (trees.size() == 0) {
-			trees = dtoList.stream().filter(s -> !ids.contains(s.getId())).collect(Collectors.toList());
+			trees = menus.stream().filter(s -> !ids.contains(s.getId())).collect(Collectors.toList());
 		}
 		map.put("content", trees);
-		map.put("totalElements", dtoList.size());
+		map.put("totalElements", menus.size());
 		return map;
 	}
 
 	@Override
-	public List<MenuVO> buildMenu(List<MenuDTO> dtoList) {
+	public List<MenuVO> buildMenu(List<MenuDTO> menus) {
 		List<MenuVO> list = new LinkedList<>();
-		dtoList.forEach(menuDTO -> {
+		menus.forEach(menuDTO -> {
 			if (menuDTO != null) {
 				List<MenuDTO> menuDtoList = menuDTO.getChildren();
 				MenuVO menuVo = new MenuVO();
@@ -119,6 +120,49 @@ public class MenuServiceImpl implements MenuService {
 		});
 
 		return list;
+	}
+
+	@Override
+	public RespBean addMenu(Menu menu) {
+		MenuDTO menuDTO = menuMapper.findByName(menu.getName(), menu.getComponentName());
+		if (menuDTO != null) {
+			return RespBean.error("菜单或者组件已存在");
+		}
+
+		int result = menuMapper.insertSelective(menu);
+		if (result == 1) {
+			return RespBean.success("新增成功");
+		}
+
+		return RespBean.error("新增失败");
+	}
+
+	@Override
+	public RespBean editMenu(Menu menu) {
+		MenuDTO menuDTO = menuMapper.findByName(menu.getName(), menu.getComponentName());
+		if (menuDTO != null) {
+			return RespBean.error("菜单或者组件已存在");
+		}
+
+		int result = menuMapper.updateByPrimaryKeySelective(menu);
+		if (result == 1) {
+			return RespBean.success("修改成功");
+		}
+
+		return RespBean.error("修改失败");
+	}
+
+	@Override
+	public RespBean delMenu(Menu menu) {
+		List<MenuDTO> children = menuMapper.findByPid(menu.getId());
+		children.forEach(menuDTO -> {
+			List<MenuDTO> byPid = menuMapper.findByPid(menuDTO.getId());
+			if (byPid != null && byPid.size() != 0) {
+				byPid.forEach(this::delMenu);
+			}
+		});
+
+		return RespBean.success("删除成功");
 	}
 
 
