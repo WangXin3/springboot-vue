@@ -2,6 +2,7 @@ package com.wxx.springbootvue.system.controller;
 
 import com.wxx.springbootvue.system.service.UserService;
 import com.wxx.springbootvue.system.util.JwtUser;
+import com.wxx.springbootvue.system.util.RespBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -24,19 +25,19 @@ public class UserController {
 
 	@GetMapping
 	@PreAuthorize("@wx.check('user:list')")
-	public ResponseEntity getUserList() {
-		return ResponseEntity.ok(userService.getUserList());
+	public RespBean getUserList() {
+		return RespBean.successData(userService.getUserList());
 	}
 
 	@GetMapping("/{uid}")
 	@PreAuthorize("@wx.check('user:list')")
-	public ResponseEntity getUserById(@PathVariable Long uid) {
-		return ResponseEntity.ok(userService.getUserById(uid));
+	public RespBean getUserById(@PathVariable Long uid) {
+		return RespBean.successData(userService.getUserById(uid));
 	}
 
 	@GetMapping("/info")
-	public ResponseEntity getCurrentUser() {
+	public RespBean getCurrentUser() {
 		JwtUser user = (JwtUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
-		return ResponseEntity.ok(user);
+		return RespBean.successData(user);
 	}
 }

@@ -23,31 +23,31 @@ public class MenuController {
 	private MenuService menuService;
 
 	@GetMapping("/build")
-	public ResponseEntity findByUser() {
-		return ResponseEntity.ok(menuService.findByUser());
+	public RespBean findByUser() {
+		return RespBean.successData(menuService.findByUser());
 	}
 
 	@GetMapping("/tree")
 	@PreAuthorize("@wx.check('menu:list')")
-	public ResponseEntity findList() {
-		return ResponseEntity.ok(menuService.findTreeList(menuService.findByPid(0L)));
+	public RespBean findList() {
+		return RespBean.successData(menuService.findTreeList(menuService.findByPid(0L)));
 	}
 
 	@PostMapping
 	@PreAuthorize("@wx.check('menu:add')")
 	public RespBean addMenu(@Validated @RequestBody Menu menu) {
-		return menuService.addMenu(menu);
+		return RespBean.successData(menuService.addMenu(menu));
 	}
 
 	@PutMapping
 	@PreAuthorize("@wx.check('menu:eidt')")
 	public RespBean editMenu(@Validated @RequestBody Menu menu) {
-		return menuService.editMenu(menu);
+		return RespBean.successData(menuService.editMenu(menu));
 	}
 
 	@DeleteMapping
 	@PreAuthorize(("@wx.check('menu:del')"))
 	public RespBean delMenu(@RequestBody Menu menu) {
-		return menuService.delMenu(menu);
+		return RespBean.successData(menuService.delMenu(menu));
 	}
 }
