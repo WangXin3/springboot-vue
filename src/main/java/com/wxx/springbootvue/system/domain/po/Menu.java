@@ -13,7 +13,7 @@ public class Menu implements Serializable {
 	private Long id;
 
 	@NotNull(message = "上级菜单id不能为空")
-	private Integer parentId;
+	private Long parentId;
 
 	private String name;
 
@@ -64,11 +64,11 @@ public class Menu implements Serializable {
 		this.id = id;
 	}
 
-	public Integer getParentId() {
+	public Long getParentId() {
 		return parentId;
 	}
 
-	public void setParentId(Integer parentId) {
+	public void setParentId(Long parentId) {
 		this.parentId = parentId;
 	}
 
