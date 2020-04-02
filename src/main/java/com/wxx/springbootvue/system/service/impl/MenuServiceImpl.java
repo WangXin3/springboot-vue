@@ -111,9 +111,24 @@ public class MenuServiceImpl implements MenuService {
 				menuVo.setMeta(new MenuMetaVO(menuDTO.getName(), menuDTO.getIcon()));
 				if (menuDtoList != null && menuDtoList.size() != 0) {
 					menuVo.setChildren(buildMenu(menuDtoList));
-					// 处理是一级菜单并且没有子菜单的情况
-				} else if (menuDTO.getParentId() == 0) {
-					menuVo.setChildren(null);
+					// 处理没有子菜单的情况
+				} else if (menuDTO.getParentId() == 0){
+					menuVo.setChildren(new ArrayList<>());
+
+					MenuVO menuVo1 = new MenuVO();
+					menuVo1.setMeta(menuVo.getMeta());
+
+					menuVo1.setPath("index");
+					menuVo1.setName(menuVo.getName());
+					menuVo1.setComponent(menuVo.getComponent());
+					menuVo.setName(null);
+					menuVo.setMeta(null);
+					menuVo.setComponent("Layout");
+					List<MenuVO> list1 = new ArrayList<>();
+					list1.add(menuVo1);
+					menuVo.setChildren(list1);
+				} else {
+					menuVo.setChildren(new ArrayList<>());
 				}
 				list.add(menuVo);
 			}
