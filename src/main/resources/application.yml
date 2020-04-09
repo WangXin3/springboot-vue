@@ -21,3 +21,6 @@ mybatis:
   mapper-locations: classpath:mapper/**/*.xml #映射文件配置
   configuration:
     map-underscore-to-camel-case: true #开启驼峰命名
+
+logback:
+  logPath: \logs #日志文件存放位置
