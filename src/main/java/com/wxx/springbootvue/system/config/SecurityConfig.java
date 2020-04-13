@@ -3,7 +3,7 @@ package com.wxx.springbootvue.system.config;
 import com.alibaba.fastjson.JSONObject;
 import com.wxx.springbootvue.system.service.UserService;
 import com.wxx.springbootvue.system.util.JwtUtils;
-import com.wxx.springbootvue.system.util.RespBean;
+import com.wxx.springbootvue.utils.RespBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.properties.EnableConfigurationProperties;
 import org.springframework.context.annotation.Bean;

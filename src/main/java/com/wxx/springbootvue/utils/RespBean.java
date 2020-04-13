@@ -1,4 +1,4 @@
-package com.wxx.springbootvue.system.util;
+package com.wxx.springbootvue.utils;
 
 import org.springframework.http.HttpStatus;
 

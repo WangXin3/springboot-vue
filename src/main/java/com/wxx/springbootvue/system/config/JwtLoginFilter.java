@@ -3,7 +3,7 @@ package com.wxx.springbootvue.system.config;
 import com.alibaba.fastjson.JSONObject;
 import com.wxx.springbootvue.system.util.JwtUser;
 import com.wxx.springbootvue.system.util.JwtUtils;
-import com.wxx.springbootvue.system.util.RespBean;
+import com.wxx.springbootvue.utils.RespBean;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;

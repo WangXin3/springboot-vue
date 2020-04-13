@@ -3,7 +3,7 @@ package com.wxx.springbootvue.system.service;
 import com.wxx.springbootvue.system.domain.dto.MenuDTO;
 import com.wxx.springbootvue.system.domain.po.Menu;
 import com.wxx.springbootvue.system.domain.vo.MenuVO;
-import com.wxx.springbootvue.system.util.RespBean;
+import com.wxx.springbootvue.utils.RespBean;
 
 import java.util.List;
 import java.util.Map;
