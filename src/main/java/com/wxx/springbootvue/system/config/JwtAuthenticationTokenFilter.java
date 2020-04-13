@@ -1,6 +1,7 @@
 package com.wxx.springbootvue.system.config;
 
 import com.alibaba.fastjson.JSONObject;
+import com.wxx.springbootvue.system.domain.po.User;
 import com.wxx.springbootvue.system.service.UserService;
 import com.wxx.springbootvue.system.util.JwtUser;
 import com.wxx.springbootvue.system.util.JwtUtils;
@@ -17,6 +18,7 @@ import javax.servlet.*;
 import javax.servlet.http.HttpServletRequest;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 
 /**
  * @author 她爱微笑
@@ -71,6 +73,13 @@ public class JwtAuthenticationTokenFilter extends GenericFilterBean {
 					SecurityContextHolder.clearContext();
 					return;
 				}
+				User u = new User();
+				u.setId(user.getId());
+				u.setLastLoginTime(new Date());
+
+				// 更新最后一次登录时间
+				userService.updateByPrimaryKeySelective(u);
+
 				UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
 						userDetails, user.getId(), userDetails.getAuthorities());
 				// 将用户信息，设置到 SecurityContext 中

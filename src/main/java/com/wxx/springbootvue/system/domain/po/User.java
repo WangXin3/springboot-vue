@@ -1,5 +1,6 @@
 package com.wxx.springbootvue.system.domain.po;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import java.io.Serializable;
@@ -36,6 +37,7 @@ public class User implements Serializable {
 	@JsonIgnore
 	private Date updateTime;
 
+	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
 	private Date lastLoginTime;
 
 	private List<Role> roles;
@@ -48,6 +50,9 @@ public class User implements Serializable {
 	public User(Long id, String username) {
 		this.id = id;
 		this.username = username;
+	}
+
+	public User() {
 	}
 
 	public Long getId() {
