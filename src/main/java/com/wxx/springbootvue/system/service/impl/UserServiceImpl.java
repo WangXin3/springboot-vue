@@ -1,6 +1,8 @@
 package com.wxx.springbootvue.system.service.impl;
 
+import com.wxx.springbootvue.system.domain.po.Role;
 import com.wxx.springbootvue.system.domain.po.User;
+import com.wxx.springbootvue.system.mapper.RoleMapper;
 import com.wxx.springbootvue.system.mapper.UserMapper;
 import com.wxx.springbootvue.system.service.RoleService;
 import com.wxx.springbootvue.system.service.UserService;
@@ -24,6 +26,9 @@ public class UserServiceImpl implements UserService {
 
 	@Autowired
 	private RoleService roleService;
+
+	@Autowired
+	private RoleMapper roleMapper;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
@@ -80,7 +85,14 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int insertSelective(User record) {
-		return userMapper.insertSelective(record);
+		int id = userMapper.insertSelective(record);
+		List<Role> roles = record.getRoles();
+		roles.forEach(role -> {
+			userMapper.insertUserBindingRole((long) id, role.getId());
+		});
+
+
+		return id;
 	}
 
 	@Override

@@ -84,7 +84,7 @@
       #{gender,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
       #{lastLoginTime,jdbcType=TIMESTAMP}, #{enabled,jdbcType=TINYINT})
   </insert>
-    <insert id="insertSelective" parameterType="com.wxx.springbootvue.system.domain.po.User">
+    <insert id="insertSelective" parameterType="com.wxx.springbootvue.system.domain.po.User" useGeneratedKeys="true">
         insert into tb_user
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -156,6 +156,9 @@
                 #{enabled,jdbcType=TINYINT},
             </if>
         </trim>
+    </insert>
+    <insert id="insertUserBindingRole">
+        insert into tb_user_role (user_id, role_id) values (userId, roleId)
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.wxx.springbootvue.system.domain.po.User">
         update tb_user

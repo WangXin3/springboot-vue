@@ -1,5 +1,6 @@
 package com.wxx.springbootvue.system.controller;
 
+import com.wxx.springbootvue.system.domain.po.User;
 import com.wxx.springbootvue.system.service.UserService;
 import com.wxx.springbootvue.system.util.JwtUser;
 import com.wxx.springbootvue.utils.RespBean;
@@ -8,10 +9,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 /**
  * @author 她爱微笑
@@ -46,5 +44,11 @@ public class UserController {
 	public RespBean getCurrentUser() {
 		JwtUser user = (JwtUser) SecurityContextHolder.getContext().getAuthentication().getPrincipal();
 		return RespBean.successData(user);
+	}
+
+
+	public RespBean addUser(@RequestBody User user) {
+		userService.insertSelective(user);
+		return RespBean.success("添加成功");
 	}
 }
