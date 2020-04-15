@@ -12,7 +12,9 @@ import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 她爱微笑
@@ -85,14 +87,16 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int insertSelective(User record) {
-		int id = userMapper.insertSelective(record);
+		int userId = userMapper.insertSelective(record);
 		List<Role> roles = record.getRoles();
-		roles.forEach(role -> {
-			userMapper.insertUserBindingRole((long) id, role.getId());
-		});
 
+		Map<String, Object> map = new HashMap<>(2);
+		map.put("userId", userId);
+		map.put("roles", roles);
 
-		return id;
+		userMapper.insertUserBindingRole(map);
+
+		return userId;
 	}
 
 	@Override

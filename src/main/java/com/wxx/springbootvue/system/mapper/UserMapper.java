@@ -5,6 +5,7 @@ import com.wxx.springbootvue.system.domain.po.User;
 import org.apache.ibatis.annotations.Param;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * @author 她爱微笑
@@ -94,9 +95,8 @@ public interface UserMapper {
 	/**
 	 * 用户绑定角色
 	 *
-	 * @param userId 用户id
-	 * @param roleId 角色id
+	 * @param map /
 	 * @return /
 	 */
-	int insertUserBindingRole(@Param("userId") Long userId, @Param("roleId") Long roleId);
+	void insertUserBindingRole(Map<String, Object> map);
 }

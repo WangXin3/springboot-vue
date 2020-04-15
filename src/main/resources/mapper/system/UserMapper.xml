@@ -158,7 +158,10 @@
         </trim>
     </insert>
     <insert id="insertUserBindingRole">
-        insert into tb_user_role (user_id, role_id) values (userId, roleId)
+        insert into tb_user_role (user_id, role_id) values
+        <foreach collection="roles" index="index" item="role" open="(" separator="," close=")">
+            #{userId}, #{role.id}
+        </foreach>
     </insert>
     <update id="updateByPrimaryKeySelective" parameterType="com.wxx.springbootvue.system.domain.po.User">
         update tb_user
