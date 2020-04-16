@@ -10,8 +10,11 @@ import com.wxx.springbootvue.system.util.JwtUser;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -85,18 +88,18 @@ public class UserServiceImpl implements UserService {
 		return userMapper.insert(record);
 	}
 
+	@Transactional(rollbackFor = Exception.class)
 	@Override
 	public int insertSelective(User record) {
-		int userId = userMapper.insertSelective(record);
-		List<Role> roles = record.getRoles();
+		record.setCreateTime(new Date());
+		String encode = new BCryptPasswordEncoder(10).encode("123456");
+		record.setPassword(encode);
+		record.setAvatar("https://wpimg.wallstcn.com/f778738c-e4f8-4870-b634-56703b4acafe.gif");
 
-		Map<String, Object> map = new HashMap<>(2);
-		map.put("userId", userId);
-		map.put("roles", roles);
 
-		userMapper.insertUserBindingRole(map);
-
-		return userId;
+		int n = userMapper.insertSelective(record);
+		userMapper.insertUserBindingRole(record.getId(), record.getRoles());
+		return n;
 	}
 
 	@Override

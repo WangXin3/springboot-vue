@@ -84,7 +84,7 @@
       #{gender,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
       #{lastLoginTime,jdbcType=TIMESTAMP}, #{enabled,jdbcType=TINYINT})
   </insert>
-    <insert id="insertSelective" parameterType="com.wxx.springbootvue.system.domain.po.User" useGeneratedKeys="true">
+    <insert id="insertSelective" keyProperty="id" parameterType="com.wxx.springbootvue.system.domain.po.User" useGeneratedKeys="true">
         insert into tb_user
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">

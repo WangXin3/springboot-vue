@@ -95,8 +95,9 @@ public interface UserMapper {
 	/**
 	 * 用户绑定角色
 	 *
-	 * @param map /
+	 * @param userId /
+	 * @param roles /
 	 * @return /
 	 */
-	void insertUserBindingRole(Map<String, Object> map);
+	void insertUserBindingRole(Long userId, List<Role> roles);
 }

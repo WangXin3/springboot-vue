@@ -11,6 +11,8 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.Map;
+
 /**
  * @author 她爱微笑
  * @date 2020/3/8
@@ -46,7 +48,8 @@ public class UserController {
 		return RespBean.successData(user);
 	}
 
-
+	@PostMapping
+	@PreAuthorize("@wx.check('user:add')")
 	public RespBean addUser(@RequestBody User user) {
 		userService.insertSelective(user);
 		return RespBean.success("添加成功");
