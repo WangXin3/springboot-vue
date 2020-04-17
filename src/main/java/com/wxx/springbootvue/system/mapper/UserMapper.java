@@ -50,7 +50,7 @@ public interface UserMapper {
 	 * @param id /
 	 * @return /
 	 */
-	int deleteByPrimaryKey(Integer id);
+	int deleteByPrimaryKey(Long id);
 
 	/**
 	 * 新增
@@ -100,4 +100,11 @@ public interface UserMapper {
 	 * @return /
 	 */
 	void insertUserBindingRole(@Param("userId") Long userId, @Param("roles")List<Role> roles);
+
+	/**
+	 * 删除用户和角色绑定关系
+	 * @param id 用户id
+	 * @return /
+	 */
+	int deleteUserBindingRole(Long id);
 }

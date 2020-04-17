@@ -73,13 +73,6 @@ public class JwtAuthenticationTokenFilter extends GenericFilterBean {
 					SecurityContextHolder.clearContext();
 					return;
 				}
-				User u = new User();
-				u.setId(user.getId());
-				u.setLastLoginTime(new Date());
-
-				// 更新最后一次登录时间
-				userService.updateByPrimaryKeySelective(u);
-
 				UsernamePasswordAuthenticationToken authentication = new UsernamePasswordAuthenticationToken(
 						userDetails, user.getId(), userDetails.getAuthorities());
 				// 将用户信息，设置到 SecurityContext 中

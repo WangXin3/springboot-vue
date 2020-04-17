@@ -1,5 +1,6 @@
 package com.wxx.springbootvue.system.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.wxx.springbootvue.system.domain.po.User;
 import com.wxx.springbootvue.system.service.UserService;
 import com.wxx.springbootvue.system.util.JwtUser;
@@ -11,6 +12,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -31,9 +33,9 @@ public class UserController {
 
 	@GetMapping
 	@PreAuthorize("@wx.check('user:list')")
-	public RespBean getUserList() {
+	public RespBean getUserList(PageInfo pageInfo) {
 		logger.info("获取用户信息");
-		return RespBean.successData(userService.getUserList());
+		return RespBean.successData(new PageInfo<>(userService.getUserList(pageInfo)));
 	}
 
 	@GetMapping("/{uid}")
@@ -53,5 +55,12 @@ public class UserController {
 	public RespBean addUser(@RequestBody User user) {
 		userService.insertSelective(user);
 		return RespBean.success("添加成功");
+	}
+
+	@DeleteMapping
+	@PreAuthorize("@wx.check('user:del')")
+	public RespBean delUser(@RequestBody List<User> users) {
+		userService.deleteByPrimaryKey(users);
+		return RespBean.success("删除成功");
 	}
 }

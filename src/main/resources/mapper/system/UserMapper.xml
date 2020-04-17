@@ -23,14 +23,16 @@
     </sql>
 
     <select id="getUserList" resultType="com.wxx.springbootvue.system.domain.po.User">
-        SELECT <include refid="userInfo"></include>
-        FROM tb_user tu;
+        SELECT
+        <include refid="userInfo"></include>
+        FROM tb_user tu
     </select>
 
     <resultMap id="userMap" type="com.wxx.springbootvue.system.domain.po.User">
         <id property="id" column="id"/>
 
-        <collection property="roles" column="id" javaType="ArrayList" ofType="com.wxx.springbootvue.system.domain.po.Role"
+        <collection property="roles" column="id" javaType="ArrayList"
+                    ofType="com.wxx.springbootvue.system.domain.po.Role"
                     select="selectRoleById"/>
     </resultMap>
 
@@ -42,23 +44,24 @@
     </select>
 
     <select id="getUserById" resultMap="userMap">
-        SELECT <include refid="userInfo"></include>
+        SELECT
+        <include refid="userInfo"></include>
         FROM tb_user tu
         WHERE tu.id = #{uid};
     </select>
 
     <resultMap id="BaseResultMap" type="com.wxx.springbootvue.system.domain.po.User">
-        <id column="id" jdbcType="INTEGER" property="id" />
-        <result column="avatar" jdbcType="VARCHAR" property="avatar" />
-        <result column="username" jdbcType="VARCHAR" property="username" />
-        <result column="password" jdbcType="VARCHAR" property="password" />
-        <result column="email" jdbcType="VARCHAR" property="email" />
-        <result column="nickname" jdbcType="VARCHAR" property="nickname" />
-        <result column="gender" jdbcType="TINYINT" property="gender" />
-        <result column="create_time" jdbcType="TIMESTAMP" property="createTime" />
-        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime" />
-        <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime" />
-        <result column="enabled" jdbcType="TINYINT" property="enabled" />
+        <id column="id" jdbcType="INTEGER" property="id"/>
+        <result column="avatar" jdbcType="VARCHAR" property="avatar"/>
+        <result column="username" jdbcType="VARCHAR" property="username"/>
+        <result column="password" jdbcType="VARCHAR" property="password"/>
+        <result column="email" jdbcType="VARCHAR" property="email"/>
+        <result column="nickname" jdbcType="VARCHAR" property="nickname"/>
+        <result column="gender" jdbcType="TINYINT" property="gender"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+        <result column="last_login_time" jdbcType="TIMESTAMP" property="lastLoginTime"/>
+        <result column="enabled" jdbcType="TINYINT" property="enabled"/>
     </resultMap>
     <sql id="Base_Column_List">
     id, avatar, username, password, email, nickname, gender, create_time, update_time,
@@ -66,14 +69,18 @@
   </sql>
     <select id="selectByPrimaryKey" parameterType="java.lang.Integer" resultMap="BaseResultMap">
         select
-        <include refid="Base_Column_List" />
+        <include refid="Base_Column_List"/>
         from tb_user
         where id = #{id,jdbcType=INTEGER}
     </select>
-    <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
-    delete from tb_user
-    where id = #{id,jdbcType=INTEGER}
-  </delete>
+    <delete id="deleteByPrimaryKey" parameterType="java.lang.Long">
+        delete from tb_user
+        where id = #{id}
+    </delete>
+    <delete id="deleteUserBindingRole" parameterType="java.lang.Long">
+        delete from tb_user_role
+        where user_id = #{id}
+    </delete>
     <insert id="insert" parameterType="com.wxx.springbootvue.system.domain.po.User">
     insert into tb_user (id, avatar, username,
       password, email, nickname,
@@ -84,7 +91,8 @@
       #{gender,jdbcType=TINYINT}, #{createTime,jdbcType=TIMESTAMP}, #{updateTime,jdbcType=TIMESTAMP},
       #{lastLoginTime,jdbcType=TIMESTAMP}, #{enabled,jdbcType=TINYINT})
   </insert>
-    <insert id="insertSelective" keyProperty="id" parameterType="com.wxx.springbootvue.system.domain.po.User" useGeneratedKeys="true">
+    <insert id="insertSelective" keyProperty="id" parameterType="com.wxx.springbootvue.system.domain.po.User"
+            useGeneratedKeys="true">
         insert into tb_user
         <trim prefix="(" suffix=")" suffixOverrides=",">
             <if test="id != null">
@@ -159,7 +167,7 @@
     </insert>
     <insert id="insertUserBindingRole">
         insert into tb_user_role (user_id, role_id) values
-        <foreach collection="roles" index="index" item="role"  separator=",">
+        <foreach collection="roles" index="index" item="role" separator=",">
             (#{userId}, #{role.id})
         </foreach>
     </insert>

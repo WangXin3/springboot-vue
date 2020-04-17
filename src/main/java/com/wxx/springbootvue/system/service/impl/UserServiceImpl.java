@@ -1,5 +1,7 @@
 package com.wxx.springbootvue.system.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.wxx.springbootvue.system.domain.po.Role;
 import com.wxx.springbootvue.system.domain.po.User;
 import com.wxx.springbootvue.system.mapper.RoleMapper;
@@ -69,7 +71,8 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public List<User> getUserList() {
+	public List<User> getUserList(PageInfo pageInfo) {
+		PageHelper.startPage(pageInfo.getPageNum(), pageInfo.getPageSize());
 		return userMapper.getUserList();
 	}
 
@@ -79,8 +82,12 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public int deleteByPrimaryKey(Integer id) {
-		return userMapper.deleteByPrimaryKey(id);
+	public void deleteByPrimaryKey(List<User> users) {
+
+		users.forEach(user -> {
+			userMapper.deleteUserBindingRole(user.getId());
+			userMapper.deleteByPrimaryKey(user.getId());
+		});
 	}
 
 	@Override

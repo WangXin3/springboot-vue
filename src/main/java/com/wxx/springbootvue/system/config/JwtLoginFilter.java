@@ -1,6 +1,8 @@
 package com.wxx.springbootvue.system.config;
 
 import com.alibaba.fastjson.JSONObject;
+import com.wxx.springbootvue.system.domain.po.User;
+import com.wxx.springbootvue.system.service.UserService;
 import com.wxx.springbootvue.system.util.JwtUser;
 import com.wxx.springbootvue.system.util.JwtUtils;
 import com.wxx.springbootvue.utils.RespBean;
@@ -18,6 +20,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.Date;
 
 /**
  * @author 她爱微笑
@@ -25,12 +28,14 @@ import java.io.PrintWriter;
  */
 public class JwtLoginFilter extends AbstractAuthenticationProcessingFilter {
 
-	@Autowired
 	private JwtUtils jwtUtils;
 
-	protected JwtLoginFilter(String defaultFilterProcessesUrl, AuthenticationManager authenticationManager, JwtUtils jwtUtils) {
+	private UserService userService;
+
+	protected JwtLoginFilter(String defaultFilterProcessesUrl, AuthenticationManager authenticationManager, JwtUtils jwtUtils, UserService userService) {
 		super(new AntPathRequestMatcher(defaultFilterProcessesUrl));
 		this.jwtUtils = jwtUtils;
+		this.userService = userService;
 		setAuthenticationManager(authenticationManager);
 	}
 
@@ -46,6 +51,13 @@ public class JwtLoginFilter extends AbstractAuthenticationProcessingFilter {
 	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
 
 		JwtUser user = (JwtUser) authResult.getPrincipal();
+
+		User u = new User();
+		u.setId(user.getId());
+		u.setLastLoginTime(new Date());
+
+		// 更新最后一次登录时间
+		userService.updateByPrimaryKeySelective(u);
 
 		String token = jwtUtils.generateToken(user);
 		token = jwtUtils.getTokenHead() + token;

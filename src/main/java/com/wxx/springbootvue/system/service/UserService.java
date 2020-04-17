@@ -1,5 +1,6 @@
 package com.wxx.springbootvue.system.service;
 
+import com.github.pagehelper.PageInfo;
 import com.wxx.springbootvue.system.domain.po.User;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
@@ -16,7 +17,7 @@ public interface UserService extends UserDetailsService {
 	 *
 	 * @return
 	 */
-	List<User> getUserList();
+	List<User> getUserList(PageInfo pageInfo);
 
 	/**
 	 * 根据用户id查询用户
@@ -28,10 +29,10 @@ public interface UserService extends UserDetailsService {
 
 	/**
 	 * 删除
-	 * @param id /
+	 * @param users /
 	 * @return /
 	 */
-	int deleteByPrimaryKey(Integer id);
+	void deleteByPrimaryKey(List<User> users);
 
 	/**
 	 * 新增
