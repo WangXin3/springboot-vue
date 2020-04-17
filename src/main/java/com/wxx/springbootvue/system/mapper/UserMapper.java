@@ -99,5 +99,5 @@ public interface UserMapper {
 	 * @param roles /
 	 * @return /
 	 */
-	void insertUserBindingRole(Long userId, List<Role> roles);
+	void insertUserBindingRole(@Param("userId") Long userId, @Param("roles")List<Role> roles);
 }

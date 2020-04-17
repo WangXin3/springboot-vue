@@ -3,7 +3,7 @@
 		"http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
 <mapper namespace="com.wxx.springbootvue.system.mapper.MenuMapper">
 	<select id="menuByUserId" resultType="com.wxx.springbootvue.system.domain.dto.MenuDTO">
-		SELECT tm.*
+		SELECT DISTINCT tm.*
 		FROM tb_menu tm
 		LEFT JOIN tb_role_menu trm ON tm.id = trm.menu_id
 		LEFT JOIN tb_user_role tur ON trm.role_id = tur.role_id
