@@ -72,7 +72,7 @@ public class JwtLoginFilter extends AbstractAuthenticationProcessingFilter {
 	protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
 		response.setContentType("application/json;charset=utf-8");
 		PrintWriter out = response.getWriter();
-		out.write(JSONObject.toJSONString(RespBean.error("登陆失败！")));
+		out.write(JSONObject.toJSONString(RespBean.error("账号/密码错误或账号被冻结！")));
 		out.flush();
 		out.close();
 	}

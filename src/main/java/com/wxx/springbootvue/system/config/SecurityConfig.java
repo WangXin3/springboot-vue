@@ -72,7 +72,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 				.accessDeniedHandler((request, response, accessDeniedException) -> {
 					// 自定义 403 Forbidden 拒绝访问，就是你没有权限访问这个接口
 					PrintWriter out = response.getWriter();
-					out.write(JSONObject.toJSONString(RespBean.error("当前用户无访问权限!", HttpStatus.FORBIDDEN)));
+					out.write(JSONObject.toJSONString(RespBean.error("无权限!", HttpStatus.FORBIDDEN)));
 					out.flush();
 					out.close();
 				})

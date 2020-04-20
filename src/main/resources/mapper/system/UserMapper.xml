@@ -8,6 +8,7 @@
         SELECT *
         FROM tb_user u
         WHERE u.username = #{username}
+        AND u.enabled = 1
     </select>
 
     <select id="getUserRoleByUid" resultType="com.wxx.springbootvue.system.domain.po.Role">
