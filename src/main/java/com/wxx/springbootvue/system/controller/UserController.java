@@ -63,4 +63,11 @@ public class UserController {
 		userService.deleteByPrimaryKey(users);
 		return RespBean.success("删除成功");
 	}
+
+	@PutMapping
+	@PreAuthorize("@wx.check('user:edit')")
+	public RespBean editUser(@RequestBody User user) {
+		userService.updateByPrimaryKeySelective(user);
+		return RespBean.success("添加成功");
+	}
 }

@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
+import org.springframework.util.CollectionUtils;
 
 import java.util.Date;
 import java.util.HashMap;
@@ -73,7 +74,13 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public List<User> getUserList(PageInfo pageInfo) {
 		PageHelper.startPage(pageInfo.getPageNum(), pageInfo.getPageSize());
-		return userMapper.getUserList();
+		List<User> userList = userMapper.getUserList();
+		userList.forEach(user -> {
+			List<Role> role = roleMapper.getRoleByUserId(user.getId());
+			user.setRoles(role);
+		});
+
+		return userList;
 	}
 
 	@Override
@@ -116,6 +123,15 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public int updateByPrimaryKeySelective(User record) {
+		if (!CollectionUtils.isEmpty(record.getRoles())) {
+			// 先删除原有绑定的角色
+			userMapper.unbindingRole(record.getId());
+
+			// 重新绑定
+			userMapper.insertUserBindingRole(record.getId(), record.getRoles());
+		}
+
+		// 更新其他数据
 		return userMapper.updateByPrimaryKeySelective(record);
 	}
 

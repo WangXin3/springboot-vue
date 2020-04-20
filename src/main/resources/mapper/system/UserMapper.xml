@@ -221,4 +221,8 @@
       enabled = #{enabled,jdbcType=TINYINT}
     where id = #{id,jdbcType=INTEGER}
   </update>
+    <delete id="unbindingRole" parameterType="java.lang.Long">
+        delete from tb_user_role
+        where user_id = #{userId}
+    </delete>
 </mapper>

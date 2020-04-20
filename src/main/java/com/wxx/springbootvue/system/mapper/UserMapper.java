@@ -107,4 +107,10 @@ public interface UserMapper {
 	 * @return /
 	 */
 	int deleteUserBindingRole(Long id);
+
+	/**
+	 * 用户和角色解绑
+	 * @param userId /
+	 */
+	void unbindingRole(Long userId);
 }
