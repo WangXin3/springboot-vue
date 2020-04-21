@@ -13,104 +13,104 @@ import java.util.Map;
  */
 public interface UserMapper {
 
-	/**
-	 * 根据用户名查询用户对象
-	 *
-	 * @param username
-	 * @return
-	 */
-	User loadUserByUsername(String username);
+    /**
+     * 根据用户名查询用户对象
+     *
+     * @param username
+     * @return
+     */
+    User loadUserByUsername(String username);
 
-	/**
-	 * 根据用户id查询用户所具有的权限
-	 *
-	 * @param id
-	 * @return
-	 */
-	List<Role> getUserRoleByUid(Long id);
+    /**
+     * 根据用户id查询用户所具有的权限
+     *
+     * @param id
+     * @return
+     */
+    List<Role> getUserRoleByUid(Long id);
 
-	/**
-	 * 获取用户列表
-	 *
-	 * @return
-	 */
-	List<User> getUserList();
+    /**
+     * 获取用户列表
+     *
+     * @return
+     */
+    List<User> getUserList();
 
-	/**
-	 * 根据用户id查询用户
-	 *
-	 * @param uid
-	 * @return
-	 */
-	User getUserById(Long uid);
+    /**
+     * 根据用户id查询用户
+     *
+     * @param uid
+     * @return
+     */
+    User getUserById(Long uid);
 
-	/**
-	 * 删除
-	 *
-	 * @param id /
-	 * @return /
-	 */
-	int deleteByPrimaryKey(Long id);
+    /**
+     * 删除
+     *
+     * @param id /
+     * @return /
+     */
+    int deleteByPrimaryKey(Long id);
 
-	/**
-	 * 新增
-	 *
-	 * @param record /
-	 * @return /
-	 */
-	int insert(User record);
+    /**
+     * 新增
+     *
+     * @param record /
+     * @return /
+     */
+    int insert(User record);
 
-	/**
-	 * 新增
-	 *
-	 * @param record /
-	 * @return /
-	 */
-	int insertSelective(User record);
+    /**
+     * 新增
+     *
+     * @param record /
+     * @return /
+     */
+    int insertSelective(User record);
 
-	/**
-	 * 查询
-	 *
-	 * @param id /
-	 * @return /
-	 */
-	User selectByPrimaryKey(Integer id);
+    /**
+     * 查询
+     *
+     * @param id /
+     * @return /
+     */
+    User selectByPrimaryKey(Integer id);
 
-	/**
-	 * 更新
-	 *
-	 * @param record /
-	 * @return /
-	 */
-	int updateByPrimaryKeySelective(User record);
+    /**
+     * 更新
+     *
+     * @param record /
+     * @return /
+     */
+    int updateByPrimaryKeySelective(User record);
 
-	/**
-	 * 更新
-	 *
-	 * @param record /
-	 * @return /
-	 */
-	int updateByPrimaryKey(User record);
+    /**
+     * 更新
+     *
+     * @param record /
+     * @return /
+     */
+    int updateByPrimaryKey(User record);
 
-	/**
-	 * 用户绑定角色
-	 *
-	 * @param userId /
-	 * @param roles /
-	 * @return /
-	 */
-	void insertUserBindingRole(@Param("userId") Long userId, @Param("roles")List<Role> roles);
+    /**
+     * 用户绑定角色
+     *
+     * @param userId /
+     * @param roles /
+     * @return /
+     */
+    void insertUserBindingRole(@Param("userId") Long userId, @Param("roles")List<Role> roles);
 
-	/**
-	 * 删除用户和角色绑定关系
-	 * @param id 用户id
-	 * @return /
-	 */
-	int deleteUserBindingRole(Long id);
+    /**
+     * 删除用户和角色绑定关系
+     * @param id 用户id
+     * @return /
+     */
+    int deleteUserBindingRole(Long id);
 
-	/**
-	 * 用户和角色解绑
-	 * @param userId /
-	 */
-	void unbindingRole(Long userId);
+    /**
+     * 用户和角色解绑
+     * @param userId /
+     */
+    void unbindingRole(Long userId);
 }

@@ -13,141 +13,141 @@ import java.util.List;
  */
 public class User implements Serializable {
 
-	private Long id;
+    private Long id;
 
-	private String avatar;
+    private String avatar;
 
-	private String username;
+    private String username;
 
-	@JsonIgnore
-	private String password;
+    @JsonIgnore
+    private String password;
 
-	private String email;
+    private String email;
 
-	private String nickname;
+    private String nickname;
 
-	/**
-	 * 0=女，1=男
-	 */
-	private Integer gender;
+    /**
+     * 0=女，1=男
+     */
+    private Integer gender;
 
-	@JsonIgnore
-	private Date createTime;
+    @JsonIgnore
+    private Date createTime;
 
-	@JsonIgnore
-	private Date updateTime;
+    @JsonIgnore
+    private Date updateTime;
 
-	@JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
-	private Date lastLoginTime;
+    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd HH:mm:ss", timezone = "GMT+8")
+    private Date lastLoginTime;
 
-	private List<Role> roles;
+    private List<Role> roles;
 
-	/**
-	 * 用户状态 0=禁用，1=正常
-	 */
-	private Boolean enabled;
+    /**
+     * 用户状态 0=禁用，1=正常
+     */
+    private Boolean enabled;
 
-	public User(Long id, String username) {
-		this.id = id;
-		this.username = username;
-	}
+    public User(Long id, String username) {
+        this.id = id;
+        this.username = username;
+    }
 
-	public User() {
-	}
+    public User() {
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public String getAvatar() {
-		return avatar;
-	}
+    public String getAvatar() {
+        return avatar;
+    }
 
-	public void setAvatar(String avatar) {
-		this.avatar = avatar;
-	}
+    public void setAvatar(String avatar) {
+        this.avatar = avatar;
+    }
 
-	public String getUsername() {
-		return username;
-	}
+    public String getUsername() {
+        return username;
+    }
 
-	public void setUsername(String username) {
-		this.username = username;
-	}
+    public void setUsername(String username) {
+        this.username = username;
+    }
 
-	public String getPassword() {
-		return password;
-	}
+    public String getPassword() {
+        return password;
+    }
 
-	public void setPassword(String password) {
-		this.password = password;
-	}
+    public void setPassword(String password) {
+        this.password = password;
+    }
 
-	public String getEmail() {
-		return email;
-	}
+    public String getEmail() {
+        return email;
+    }
 
-	public void setEmail(String email) {
-		this.email = email;
-	}
+    public void setEmail(String email) {
+        this.email = email;
+    }
 
-	public String getNickname() {
-		return nickname;
-	}
+    public String getNickname() {
+        return nickname;
+    }
 
-	public void setNickname(String nickname) {
-		this.nickname = nickname;
-	}
+    public void setNickname(String nickname) {
+        this.nickname = nickname;
+    }
 
-	public Integer getGender() {
-		return gender;
-	}
+    public Integer getGender() {
+        return gender;
+    }
 
-	public void setGender(Integer gender) {
-		this.gender = gender;
-	}
+    public void setGender(Integer gender) {
+        this.gender = gender;
+    }
 
-	public Date getCreateTime() {
-		return createTime;
-	}
+    public Date getCreateTime() {
+        return createTime;
+    }
 
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
 
-	public Date getUpdateTime() {
-		return updateTime;
-	}
+    public Date getUpdateTime() {
+        return updateTime;
+    }
 
-	public void setUpdateTime(Date updateTime) {
-		this.updateTime = updateTime;
-	}
+    public void setUpdateTime(Date updateTime) {
+        this.updateTime = updateTime;
+    }
 
-	public Date getLastLoginTime() {
-		return lastLoginTime;
-	}
+    public Date getLastLoginTime() {
+        return lastLoginTime;
+    }
 
-	public void setLastLoginTime(Date lastLoginTime) {
-		this.lastLoginTime = lastLoginTime;
-	}
+    public void setLastLoginTime(Date lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
+    }
 
-	public List<Role> getRoles() {
-		return roles;
-	}
+    public List<Role> getRoles() {
+        return roles;
+    }
 
-	public void setRoles(List<Role> roles) {
-		this.roles = roles;
-	}
+    public void setRoles(List<Role> roles) {
+        this.roles = roles;
+    }
 
-	public Boolean getEnabled() {
-		return enabled;
-	}
+    public Boolean getEnabled() {
+        return enabled;
+    }
 
-	public void setEnabled(Boolean enabled) {
-		this.enabled = enabled;
-	}
+    public void setEnabled(Boolean enabled) {
+        this.enabled = enabled;
+    }
 }

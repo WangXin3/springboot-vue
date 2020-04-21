@@ -28,52 +28,52 @@ import java.util.Date;
  */
 public class JwtLoginFilter extends AbstractAuthenticationProcessingFilter {
 
-	private JwtUtils jwtUtils;
+    private JwtUtils jwtUtils;
 
-	private UserService userService;
+    private UserService userService;
 
-	protected JwtLoginFilter(String defaultFilterProcessesUrl, AuthenticationManager authenticationManager, JwtUtils jwtUtils, UserService userService) {
-		super(new AntPathRequestMatcher(defaultFilterProcessesUrl));
-		this.jwtUtils = jwtUtils;
-		this.userService = userService;
-		setAuthenticationManager(authenticationManager);
-	}
+    protected JwtLoginFilter(String defaultFilterProcessesUrl, AuthenticationManager authenticationManager, JwtUtils jwtUtils, UserService userService) {
+        super(new AntPathRequestMatcher(defaultFilterProcessesUrl));
+        this.jwtUtils = jwtUtils;
+        this.userService = userService;
+        setAuthenticationManager(authenticationManager);
+    }
 
-	@Override
-	public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
-		String username = request.getParameter("username");
-		String password = request.getParameter("password");
+    @Override
+    public Authentication attemptAuthentication(HttpServletRequest request, HttpServletResponse response) throws AuthenticationException, IOException, ServletException {
+        String username = request.getParameter("username");
+        String password = request.getParameter("password");
 
-		return getAuthenticationManager().authenticate(new UsernamePasswordAuthenticationToken(username, password));
-	}
+        return getAuthenticationManager().authenticate(new UsernamePasswordAuthenticationToken(username, password));
+    }
 
-	@Override
-	protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
+    @Override
+    protected void successfulAuthentication(HttpServletRequest request, HttpServletResponse response, FilterChain chain, Authentication authResult) throws IOException, ServletException {
 
-		JwtUser user = (JwtUser) authResult.getPrincipal();
+        JwtUser user = (JwtUser) authResult.getPrincipal();
 
-		User u = new User();
-		u.setId(user.getId());
-		u.setLastLoginTime(new Date());
+        User u = new User();
+        u.setId(user.getId());
+        u.setLastLoginTime(new Date());
 
-		// 更新最后一次登录时间
-		userService.updateByPrimaryKeySelective(u);
+        // 更新最后一次登录时间
+        userService.updateByPrimaryKeySelective(u);
 
-		String token = jwtUtils.generateToken(user);
-		token = jwtUtils.getTokenHead() + token;
-		response.setContentType("application/json;charset=utf-8");
-		PrintWriter out = response.getWriter();
-		out.write(JSONObject.toJSONString(RespBean.success("登录成功！", token)));
-		out.flush();
-		out.close();
-	}
+        String token = jwtUtils.generateToken(user);
+        token = jwtUtils.getTokenHead() + token;
+        response.setContentType("application/json;charset=utf-8");
+        PrintWriter out = response.getWriter();
+        out.write(JSONObject.toJSONString(RespBean.success("登录成功！", token)));
+        out.flush();
+        out.close();
+    }
 
-	@Override
-	protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
-		response.setContentType("application/json;charset=utf-8");
-		PrintWriter out = response.getWriter();
-		out.write(JSONObject.toJSONString(RespBean.error("账号/密码错误或账号被冻结！")));
-		out.flush();
-		out.close();
-	}
+    @Override
+    protected void unsuccessfulAuthentication(HttpServletRequest request, HttpServletResponse response, AuthenticationException failed) throws IOException, ServletException {
+        response.setContentType("application/json;charset=utf-8");
+        PrintWriter out = response.getWriter();
+        out.write(JSONObject.toJSONString(RespBean.error("账号/密码错误或账号被冻结！")));
+        out.flush();
+        out.close();
+    }
 }

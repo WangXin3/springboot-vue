@@ -17,12 +17,12 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/system/role")
 public class RoleController {
 
-	@Autowired
-	private RoleService roleService;
+    @Autowired
+    private RoleService roleService;
 
-	@GetMapping
-	@PreAuthorize("@wx.check('role:list')")
-	public RespBean roleList() {
-		return RespBean.successData(roleService.getRoleList());
-	}
+    @GetMapping
+    @PreAuthorize("@wx.check('role:list')")
+    public RespBean roleList() {
+        return RespBean.successData(roleService.getRoleList());
+    }
 }

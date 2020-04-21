@@ -18,111 +18,111 @@ import java.util.List;
 @ConfigurationProperties(prefix = "jwt")
 public class JwtUtils {
 
-	/**
-	 * 密匙KEY
-	 */
-	private String secret;
+    /**
+     * 密匙KEY
+     */
+    private String secret;
 
-	/**
-	 * 过期时间 单位分钟
-	 */
-	private Integer expire;
+    /**
+     * 过期时间 单位分钟
+     */
+    private Integer expire;
 
-	/**
-	 * 请求头名称
-	 */
-	private String tokenHeader;
+    /**
+     * 请求头名称
+     */
+    private String tokenHeader;
 
-	/**
-	 * Token前缀字符
-	 */
-	private String tokenHead;
+    /**
+     * Token前缀字符
+     */
+    private String tokenHead;
 
-	/**
-	 * 不需要认证就可以访问的url
-	 */
-	private List<String> ignoreUrl;
+    /**
+     * 不需要认证就可以访问的url
+     */
+    private List<String> ignoreUrl;
 
-	/**
-	 * 生成token
-	 *
-	 * @param user 载荷中的数据
-	 * @return
-	 * @throws Exception
-	 */
-	public String generateToken(JwtUser user) {
-		return Jwts.builder()
-				.claim(JwtConstans.JWT_KEY_ID, user.getId())
-				.claim(JwtConstans.JWT_KEY_USER_NAME, user.getUsername())
-				.setExpiration(DateTime.now().plusMinutes(this.expire).toDate())
-				.signWith(SignatureAlgorithm.HS512, secret)
-				.compact();
-	}
-
-
-	/**
-	 * 获取token中的用户信息
-	 *
-	 * @param token 用户请求中的令牌
-	 * @return 用户信息
-	 * @throws Exception
-	 */
-	public JwtUser getInfoFromToken(String token) {
-		Jws<Claims> claimsJws = Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token);
-		Claims body = claimsJws.getBody();
-		return new JwtUser(
-				ObjectUtils.toLong(body.get(JwtConstans.JWT_KEY_ID)),
-				ObjectUtils.toString(body.get(JwtConstans.JWT_KEY_USER_NAME))
-		);
-	}
-
-	/**
-	 * 获取去掉令牌头之后的token
-	 * @param token
-	 * @return
-	 */
-	public String getCompleteToken(String token) {
-		return token.substring(this.getTokenHead().length());
-	}
+    /**
+     * 生成token
+     *
+     * @param user 载荷中的数据
+     * @return
+     * @throws Exception
+     */
+    public String generateToken(JwtUser user) {
+        return Jwts.builder()
+                .claim(JwtConstans.JWT_KEY_ID, user.getId())
+                .claim(JwtConstans.JWT_KEY_USER_NAME, user.getUsername())
+                .setExpiration(DateTime.now().plusMinutes(this.expire).toDate())
+                .signWith(SignatureAlgorithm.HS512, secret)
+                .compact();
+    }
 
 
-	public String getSecret() {
-		return secret;
-	}
+    /**
+     * 获取token中的用户信息
+     *
+     * @param token 用户请求中的令牌
+     * @return 用户信息
+     * @throws Exception
+     */
+    public JwtUser getInfoFromToken(String token) {
+        Jws<Claims> claimsJws = Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token);
+        Claims body = claimsJws.getBody();
+        return new JwtUser(
+                ObjectUtils.toLong(body.get(JwtConstans.JWT_KEY_ID)),
+                ObjectUtils.toString(body.get(JwtConstans.JWT_KEY_USER_NAME))
+        );
+    }
 
-	public void setSecret(String secret) {
-		this.secret = secret;
-	}
+    /**
+     * 获取去掉令牌头之后的token
+     * @param token
+     * @return
+     */
+    public String getCompleteToken(String token) {
+        return token.substring(this.getTokenHead().length());
+    }
 
-	public Integer getExpire() {
-		return expire;
-	}
 
-	public void setExpire(Integer expire) {
-		this.expire = expire;
-	}
+    public String getSecret() {
+        return secret;
+    }
 
-	public String getTokenHeader() {
-		return tokenHeader;
-	}
+    public void setSecret(String secret) {
+        this.secret = secret;
+    }
 
-	public void setTokenHeader(String tokenHeader) {
-		this.tokenHeader = tokenHeader;
-	}
+    public Integer getExpire() {
+        return expire;
+    }
 
-	public String getTokenHead() {
-		return tokenHead;
-	}
+    public void setExpire(Integer expire) {
+        this.expire = expire;
+    }
 
-	public void setTokenHead(String tokenHead) {
-		this.tokenHead = tokenHead;
-	}
+    public String getTokenHeader() {
+        return tokenHeader;
+    }
 
-	public List<String> getIgnoreUrl() {
-		return ignoreUrl;
-	}
+    public void setTokenHeader(String tokenHeader) {
+        this.tokenHeader = tokenHeader;
+    }
 
-	public void setIgnoreUrl(List<String> ignoreUrl) {
-		this.ignoreUrl = ignoreUrl;
-	}
+    public String getTokenHead() {
+        return tokenHead;
+    }
+
+    public void setTokenHead(String tokenHead) {
+        this.tokenHead = tokenHead;
+    }
+
+    public List<String> getIgnoreUrl() {
+        return ignoreUrl;
+    }
+
+    public void setIgnoreUrl(List<String> ignoreUrl) {
+        this.ignoreUrl = ignoreUrl;
+    }
 }

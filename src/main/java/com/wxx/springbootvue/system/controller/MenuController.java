@@ -17,35 +17,35 @@ import org.springframework.web.bind.annotation.*;
 @RequestMapping("/system/menu")
 public class MenuController {
 
-	@Autowired
-	private MenuService menuService;
+    @Autowired
+    private MenuService menuService;
 
-	@GetMapping("/build")
-	public RespBean findByUser() {
-		return RespBean.successData(menuService.findByUser());
-	}
+    @GetMapping("/build")
+    public RespBean findByUser() {
+        return RespBean.successData(menuService.findByUser());
+    }
 
-	@GetMapping("/tree")
-	@PreAuthorize("@wx.check('menu:list')")
-	public RespBean findList() {
-		return RespBean.successData(menuService.findTreeList(menuService.findByPid(0L)));
-	}
+    @GetMapping("/tree")
+    @PreAuthorize("@wx.check('menu:list')")
+    public RespBean findList() {
+        return RespBean.successData(menuService.findTreeList(menuService.findByPid(0L)));
+    }
 
-	@PostMapping
-	@PreAuthorize("@wx.check('menu:add')")
-	public RespBean addMenu(@Validated @RequestBody Menu menu) {
-		return RespBean.successData(menuService.addMenu(menu));
-	}
+    @PostMapping
+    @PreAuthorize("@wx.check('menu:add')")
+    public RespBean addMenu(@Validated @RequestBody Menu menu) {
+        return RespBean.successData(menuService.addMenu(menu));
+    }
 
-	@PutMapping
-	@PreAuthorize("@wx.check('menu:eidt')")
-	public RespBean editMenu(@Validated @RequestBody Menu menu) {
-		return RespBean.successData(menuService.editMenu(menu));
-	}
+    @PutMapping
+    @PreAuthorize("@wx.check('menu:eidt')")
+    public RespBean editMenu(@Validated @RequestBody Menu menu) {
+        return RespBean.successData(menuService.editMenu(menu));
+    }
 
-	@DeleteMapping
-	@PreAuthorize(("@wx.check('menu:del')"))
-	public RespBean delMenu(@RequestBody Menu menu) {
-		return RespBean.successData(menuService.delMenu(menu));
-	}
+    @DeleteMapping
+    @PreAuthorize(("@wx.check('menu:del')"))
+    public RespBean delMenu(@RequestBody Menu menu) {
+        return RespBean.successData(menuService.delMenu(menu));
+    }
 }

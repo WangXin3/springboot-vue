@@ -10,121 +10,121 @@ import java.util.Date;
  */
 public class Menu implements Serializable {
 
-	private Long id;
+    private Long id;
 
-	@NotNull(message = "上级菜单id不能为空")
-	private Long parentId;
+    @NotNull(message = "上级菜单id不能为空")
+    private Long parentId;
 
-	private String name;
+    private String name;
 
-	private String component;
+    private String component;
 
-	private String icon;
+    private String icon;
 
-	private String path;
+    private String path;
 
-	private String componentName;
+    private String componentName;
 
-	@NotNull(message = "资源类型不能为空")
-	private Integer type;
+    @NotNull(message = "资源类型不能为空")
+    private Integer type;
 
-	private String permission;
+    private String permission;
 
-	private Date createTime;
+    private Date createTime;
 
-	@Override
-	public String toString() {
-		return "Menu{" +
-				"id=" + id +
-				", parentId=" + parentId +
-				", name='" + name + '\'' +
-				", component='" + component + '\'' +
-				", icon='" + icon + '\'' +
-				", path='" + path + '\'' +
-				", componentName='" + componentName + '\'' +
-				", type=" + type +
-				", permission='" + permission + '\'' +
-				", createTime=" + createTime +
-				'}';
-	}
+    @Override
+    public String toString() {
+        return "Menu{" +
+                "id=" + id +
+                ", parentId=" + parentId +
+                ", name='" + name + '\'' +
+                ", component='" + component + '\'' +
+                ", icon='" + icon + '\'' +
+                ", path='" + path + '\'' +
+                ", componentName='" + componentName + '\'' +
+                ", type=" + type +
+                ", permission='" + permission + '\'' +
+                ", createTime=" + createTime +
+                '}';
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public Long getId() {
-		return id;
-	}
+    public Long getId() {
+        return id;
+    }
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+    public void setId(Long id) {
+        this.id = id;
+    }
 
-	public Long getParentId() {
-		return parentId;
-	}
+    public Long getParentId() {
+        return parentId;
+    }
 
-	public void setParentId(Long parentId) {
-		this.parentId = parentId;
-	}
+    public void setParentId(Long parentId) {
+        this.parentId = parentId;
+    }
 
-	public String getComponent() {
-		return component;
-	}
+    public String getComponent() {
+        return component;
+    }
 
-	public void setComponent(String component) {
-		this.component = component;
-	}
+    public void setComponent(String component) {
+        this.component = component;
+    }
 
-	public String getIcon() {
-		return icon;
-	}
+    public String getIcon() {
+        return icon;
+    }
 
-	public void setIcon(String icon) {
-		this.icon = icon;
-	}
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
 
-	public String getPath() {
-		return path;
-	}
+    public String getPath() {
+        return path;
+    }
 
-	public void setPath(String path) {
-		this.path = path;
-	}
+    public void setPath(String path) {
+        this.path = path;
+    }
 
-	public String getComponentName() {
-		return componentName;
-	}
+    public String getComponentName() {
+        return componentName;
+    }
 
-	public void setComponentName(String componentName) {
-		this.componentName = componentName;
-	}
+    public void setComponentName(String componentName) {
+        this.componentName = componentName;
+    }
 
-	public Integer getType() {
-		return type;
-	}
+    public Integer getType() {
+        return type;
+    }
 
-	public void setType(Integer type) {
-		this.type = type;
-	}
+    public void setType(Integer type) {
+        this.type = type;
+    }
 
-	public String getPermission() {
-		return permission;
-	}
+    public String getPermission() {
+        return permission;
+    }
 
-	public void setPermission(String permission) {
-		this.permission = permission;
-	}
+    public void setPermission(String permission) {
+        this.permission = permission;
+    }
 
-	public Date getCreateTime() {
-		return createTime;
-	}
+    public Date getCreateTime() {
+        return createTime;
+    }
 
-	public void setCreateTime(Date createTime) {
-		this.createTime = createTime;
-	}
+    public void setCreateTime(Date createTime) {
+        this.createTime = createTime;
+    }
 }

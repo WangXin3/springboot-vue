@@ -13,16 +13,16 @@ import java.util.List;
  */
 public interface RoleService {
 
-	/**
-	 * 获取角色列表
-	 * @return
-	 */
-	List<Role> getRoleList();
+    /**
+     * 获取角色列表
+     * @return
+     */
+    List<Role> getRoleList();
 
-	/**
-	 * 获取当前用户被授予的权限
-	 * @param user
-	 * @return
-	 */
-	Collection<GrantedAuthority> getGrantedAuthorities(User user);
+    /**
+     * 获取当前用户被授予的权限
+     * @param user
+     * @return
+     */
+    Collection<GrantedAuthority> getGrantedAuthorities(User user);
 }

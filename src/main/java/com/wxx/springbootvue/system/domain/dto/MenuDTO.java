@@ -12,20 +12,20 @@ import java.util.List;
  */
 public class MenuDTO extends Menu {
 
-	private List<MenuDTO> children;
+    private List<MenuDTO> children;
 
-	public List<MenuDTO> getChildren() {
-		return children;
-	}
+    public List<MenuDTO> getChildren() {
+        return children;
+    }
 
-	public void setChildren(List<MenuDTO> children) {
-		this.children = children;
-	}
+    public void setChildren(List<MenuDTO> children) {
+        this.children = children;
+    }
 
-	@Override
-	public String toString() {
-		return "MenuDTO{" +
-				"children=" + children +
-				'}';
-	}
+    @Override
+    public String toString() {
+        return "MenuDTO{" +
+                "children=" + children +
+                '}';
+    }
 }

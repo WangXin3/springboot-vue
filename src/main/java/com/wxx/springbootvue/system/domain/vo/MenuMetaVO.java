@@ -6,36 +6,36 @@ package com.wxx.springbootvue.system.domain.vo;
  */
 public class MenuMetaVO {
 
-	private String title;
+    private String title;
 
-	private String icon;
+    private String icon;
 
-	public MenuMetaVO(String title, String icon) {
-		this.title = title;
-		this.icon = icon;
-	}
+    public MenuMetaVO(String title, String icon) {
+        this.title = title;
+        this.icon = icon;
+    }
 
-	@Override
-	public String toString() {
-		return "MenuMetaVO{" +
-				"title='" + title + '\'' +
-				", icon='" + icon + '\'' +
-				'}';
-	}
+    @Override
+    public String toString() {
+        return "MenuMetaVO{" +
+                "title='" + title + '\'' +
+                ", icon='" + icon + '\'' +
+                '}';
+    }
 
-	public String getTitle() {
-		return title;
-	}
+    public String getTitle() {
+        return title;
+    }
 
-	public void setTitle(String title) {
-		this.title = title;
-	}
+    public void setTitle(String title) {
+        this.title = title;
+    }
 
-	public String getIcon() {
-		return icon;
-	}
+    public String getIcon() {
+        return icon;
+    }
 
-	public void setIcon(String icon) {
-		this.icon = icon;
-	}
+    public void setIcon(String icon) {
+        this.icon = icon;
+    }
 }

@@ -9,65 +9,65 @@ import java.util.List;
  */
 public class MenuVO implements Serializable {
 
-	private String name;
+    private String name;
 
-	private String path;
+    private String path;
 
-	private String component;
+    private String component;
 
-	private MenuMetaVO meta;
+    private MenuMetaVO meta;
 
-	private List<MenuVO> children;
+    private List<MenuVO> children;
 
 
-	@Override
-	public String toString() {
-		return "MenuVO{" +
-				"name='" + name + '\'' +
-				", path='" + path + '\'' +
-				", component='" + component + '\'' +
-				", meta=" + meta +
-				", children=" + children +
-				'}';
-	}
+    @Override
+    public String toString() {
+        return "MenuVO{" +
+                "name='" + name + '\'' +
+                ", path='" + path + '\'' +
+                ", component='" + component + '\'' +
+                ", meta=" + meta +
+                ", children=" + children +
+                '}';
+    }
 
-	public String getName() {
-		return name;
-	}
+    public String getName() {
+        return name;
+    }
 
-	public void setName(String name) {
-		this.name = name;
-	}
+    public void setName(String name) {
+        this.name = name;
+    }
 
-	public String getPath() {
-		return path;
-	}
+    public String getPath() {
+        return path;
+    }
 
-	public void setPath(String path) {
-		this.path = path;
-	}
+    public void setPath(String path) {
+        this.path = path;
+    }
 
-	public String getComponent() {
-		return component;
-	}
+    public String getComponent() {
+        return component;
+    }
 
-	public void setComponent(String component) {
-		this.component = component;
-	}
+    public void setComponent(String component) {
+        this.component = component;
+    }
 
-	public MenuMetaVO getMeta() {
-		return meta;
-	}
+    public MenuMetaVO getMeta() {
+        return meta;
+    }
 
-	public void setMeta(MenuMetaVO meta) {
-		this.meta = meta;
-	}
+    public void setMeta(MenuMetaVO meta) {
+        this.meta = meta;
+    }
 
-	public List<MenuVO> getChildren() {
-		return children;
-	}
+    public List<MenuVO> getChildren() {
+        return children;
+    }
 
-	public void setChildren(List<MenuVO> children) {
-		this.children = children;
-	}
+    public void setChildren(List<MenuVO> children) {
+        this.children = children;
+    }
 }
