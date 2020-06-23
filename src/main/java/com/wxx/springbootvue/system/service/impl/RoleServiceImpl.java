@@ -1,5 +1,7 @@
 package com.wxx.springbootvue.system.service.impl;
 
+import com.github.pagehelper.PageHelper;
+import com.github.pagehelper.PageInfo;
 import com.wxx.springbootvue.system.domain.po.Menu;
 import com.wxx.springbootvue.system.domain.po.Role;
 import com.wxx.springbootvue.system.mapper.RoleMapper;
@@ -29,6 +31,12 @@ public class RoleServiceImpl implements RoleService {
 
     @Override
     public List<Role> getRoleList() {
+        return roleMapper.getRoleList();
+    }
+
+    @Override
+    public List<Role> getRoleList(PageInfo pageInfo) {
+        PageHelper.startPage(pageInfo.getPageNum(), pageInfo.getPageSize());
         return roleMapper.getRoleList();
     }
 

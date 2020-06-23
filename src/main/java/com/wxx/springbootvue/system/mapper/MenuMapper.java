@@ -28,6 +28,12 @@ public interface MenuMapper {
     List<MenuDTO> findByPid(Long pid);
 
     /**
+     * 查询所有一级菜单
+     * @return /
+     */
+    List<MenuDTO> findAllTopMenu();
+
+    /**
      * 根据菜单名称查找菜单
      * @param name 菜单名称
      * @param componentName 组件名称
@@ -76,4 +82,11 @@ public interface MenuMapper {
      * @return /
      */
     int updateByPrimaryKey(Menu record);
+
+    /**
+     * 根据角色id查询菜单
+     * @param roleId 角色id
+     * @return /
+     */
+    List<MenuDTO> findByRoleId(Long roleId);
 }

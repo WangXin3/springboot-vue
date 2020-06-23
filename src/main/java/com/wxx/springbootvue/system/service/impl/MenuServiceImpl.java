@@ -39,26 +39,27 @@ public class MenuServiceImpl implements MenuService {
 
     @Override
     public List<MenuDTO> findByPid(Long pid) {
-        return menuMapper.findByPid(pid);
+        return menuMapper.findAllTopMenu();
     }
 
     @Override
     public List findTreeList(List<MenuDTO> menus) {
         List<Map<String, Object>> list = new LinkedList<>();
 
-        menus.forEach(menu -> {
+        for (MenuDTO menu : menus) {
             if (menu != null) {
-                List<MenuDTO> menuList = menuMapper.findByPid(menu.getId());
                 Map<String, Object> map = new HashMap<>(16);
                 map.put("id", menu.getId());
                 map.put("label", menu.getName());
+
+                List<MenuDTO> menuList = menuMapper.findByPid(menu.getId());
                 if (!CollectionUtils.isEmpty(menuList)) {
                     map.put("children", findTreeList(menuList));
                 }
 
                 list.add(map);
             }
-        });
+        }
 
 
         return list;
@@ -178,6 +179,11 @@ public class MenuServiceImpl implements MenuService {
         });
 
         return RespBean.success("删除成功");
+    }
+
+    @Override
+    public List<MenuDTO> findByRoleId(Long roleId) {
+        return menuMapper.findByRoleId(roleId);
     }
 
 

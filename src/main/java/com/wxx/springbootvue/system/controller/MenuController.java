@@ -48,4 +48,10 @@ public class MenuController {
     public RespBean delMenu(@RequestBody Menu menu) {
         return RespBean.successData(menuService.delMenu(menu));
     }
+
+    @GetMapping("/tree/{roleId}")
+    @PreAuthorize("@wx.check('menu:list')")
+    public RespBean getMenusTreeByRoleId(@PathVariable("roleId") Long roleId) {
+        return RespBean.successData(menuService.findByRoleId(roleId));
+    }
 }

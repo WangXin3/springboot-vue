@@ -1,5 +1,6 @@
 package com.wxx.springbootvue.system.controller;
 
+import com.github.pagehelper.PageInfo;
 import com.wxx.springbootvue.system.service.RoleService;
 import com.wxx.springbootvue.utils.RespBean;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,6 +24,12 @@ public class RoleController {
     @GetMapping
     @PreAuthorize("@wx.check('role:list')")
     public RespBean roleList() {
+        return RespBean.successData(roleService.getRoleList());
+    }
+
+    @GetMapping(value = "/roleListPage")
+    @PreAuthorize("@wx.check('role:list')")
+    public RespBean roleListPage(PageInfo pageInfo) {
         return RespBean.successData(roleService.getRoleList());
     }
 }

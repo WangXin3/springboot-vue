@@ -1,5 +1,6 @@
 package com.wxx.springbootvue.system.service;
 
+import com.github.pagehelper.PageInfo;
 import com.wxx.springbootvue.system.domain.po.Role;
 import com.wxx.springbootvue.system.domain.po.User;
 import org.springframework.security.core.GrantedAuthority;
@@ -18,6 +19,13 @@ public interface RoleService {
      * @return
      */
     List<Role> getRoleList();
+
+    /**
+     * 分页查询角色信息
+     * @param pageInfo 分页对象
+     * @return /
+     */
+    List<Role> getRoleList(PageInfo pageInfo);
 
     /**
      * 获取当前用户被授予的权限

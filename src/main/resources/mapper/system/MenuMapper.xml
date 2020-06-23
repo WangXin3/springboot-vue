@@ -14,8 +14,7 @@
     <select id="findByPid" resultType="com.wxx.springbootvue.system.domain.dto.MenuDTO">
 		SELECT *
 		FROM tb_menu tm
-		WHERE tm.parent_id = #{pid}
-		AND tm.type != 3;
+		WHERE tm.parent_id = #{pid};
 	</select>
     <select id="findByName" resultType="com.wxx.springbootvue.system.domain.dto.MenuDTO">
 		SELECT *
@@ -45,6 +44,18 @@
         <include refid="Base_Column_List" />
         from tb_menu
         where id = #{id,jdbcType=INTEGER}
+    </select>
+    <select id="findByRoleId" resultType="com.wxx.springbootvue.system.domain.dto.MenuDTO">
+        SELECT tm.id
+        FROM tb_menu tm
+        LEFT JOIN tb_role_menu trm ON trm.menu_id = tm.id
+        WHERE
+         trm.role_id = #{roleId};
+    </select>
+    <select id="findAllTopMenu" resultType="com.wxx.springbootvue.system.domain.dto.MenuDTO">
+        select *
+        from tb_menu tm
+        where tm.type = 1;
     </select>
     <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer">
     delete from tb_menu

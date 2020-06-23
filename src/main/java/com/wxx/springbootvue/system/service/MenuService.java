@@ -76,4 +76,11 @@ public interface MenuService {
      * @return /
      */
     RespBean delMenu(Menu menu);
+
+    /**
+     * 根据角色id查询菜单
+     * @param roleId 角色id
+     * @return /
+     */
+    List<MenuDTO> findByRoleId(Long roleId);
 }
