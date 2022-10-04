@@ -7,14 +7,14 @@ import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import org.joda.time.DateTime;
 import org.springframework.boot.context.properties.ConfigurationProperties;
-import org.springframework.stereotype.Component;
+import org.springframework.context.annotation.Configuration;
 
 import java.util.List;
 
 /**
  * @author Wang
  */
-@Component
+@Configuration
 @ConfigurationProperties(prefix = "jwt")
 public class JwtUtils {
 
@@ -47,8 +47,8 @@ public class JwtUtils {
      * 生成token
      *
      * @param user 载荷中的数据
-     * @return
-     * @throws Exception
+     * @return /
+     * @throws Exception /
      */
     public String generateToken(JwtUser user) {
         return Jwts.builder()
@@ -65,7 +65,7 @@ public class JwtUtils {
      *
      * @param token 用户请求中的令牌
      * @return 用户信息
-     * @throws Exception
+     * @throws Exception /
      */
     public JwtUser getInfoFromToken(String token) {
         Jws<Claims> claimsJws = Jwts.parser().setSigningKey(this.secret).parseClaimsJws(token);
@@ -78,8 +78,9 @@ public class JwtUtils {
 
     /**
      * 获取去掉令牌头之后的token
-     * @param token
-     * @return
+     *
+     * @param token /
+     * @return /
      */
     public String getCompleteToken(String token) {
         return token.substring(this.getTokenHead().length());
