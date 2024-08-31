@@ -26,7 +26,3 @@
 ![](https://i.loli.net/2020/05/04/PTpgjDWlvmG5hCd.png)
 
 
-
-## 前端源码地址
-
-https://github.com/WangXin3/vue-admin-template
